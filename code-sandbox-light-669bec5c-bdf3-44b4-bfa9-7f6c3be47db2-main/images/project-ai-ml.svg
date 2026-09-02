@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" role="img" aria-label="Neural network diagram with connected nodes and a training accuracy chart">
+  <defs>
+    <linearGradient id="aiBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#080d1e"/>
+      <stop offset="100%" stop-color="#131029"/>
+    </linearGradient>
+    <linearGradient id="aiLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <radialGradient id="aiGlow" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.34"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="640" height="360" fill="url(#aiBg)"/>
+  <rect width="640" height="360" fill="url(#aiGlow)"/>
+
+  <!-- grid -->
+  <g stroke="#ffffff" stroke-opacity="0.035">
+    <path d="M0 60h640M0 120h640M0 180h640M0 240h640M0 300h640"/>
+    <path d="M80 0v360M160 0v360M240 0v360M320 0v360M400 0v360M480 0v360M560 0v360"/>
+  </g>
+
+  <!-- layer labels -->
+  <g font-family="monospace" font-size="10" fill="#6b7391" text-anchor="middle">
+    <text x="96" y="46">input</text>
+    <text x="216" y="46">hidden</text>
+    <text x="336" y="46">hidden</text>
+    <text x="452" y="46">output</text>
+  </g>
+
+  <!-- connections -->
+  <g stroke="url(#aiLine)" stroke-width="1.1" fill="none" opacity="0.5">
+    <path d="M96 96 L216 84 M96 96 L216 148 M96 96 L216 212 M96 96 L216 268"/>
+    <path d="M96 168 L216 84 M96 168 L216 148 M96 168 L216 212 M96 168 L216 268"/>
+    <path d="M96 240 L216 84 M96 240 L216 148 M96 240 L216 212 M96 240 L216 268"/>
+    <path d="M216 84 L336 112 M216 148 L336 112 M216 212 L336 112 M216 268 L336 112"/>
+    <path d="M216 84 L336 176 M216 148 L336 176 M216 212 L336 176 M216 268 L336 176"/>
+    <path d="M216 84 L336 240 M216 148 L336 240 M216 212 L336 240 M216 268 L336 240"/>
+    <path d="M336 112 L452 148 M336 176 L452 148 M336 240 L452 148"/>
+    <path d="M336 112 L452 210 M336 176 L452 210 M336 240 L452 210"/>
+  </g>
+
+  <!-- nodes -->
+  <g>
+    <circle cx="96" cy="96"  r="9" fill="#3b82f6"/>
+    <circle cx="96" cy="168" r="9" fill="#3b82f6"/>
+    <circle cx="96" cy="240" r="9" fill="#3b82f6"/>
+
+    <circle cx="216" cy="84"  r="9" fill="#8b5cf6"/>
+    <circle cx="216" cy="148" r="9" fill="#8b5cf6"/>
+    <circle cx="216" cy="212" r="9" fill="#8b5cf6"/>
+    <circle cx="216" cy="268" r="9" fill="#8b5cf6"/>
+
+    <circle cx="336" cy="112" r="9" fill="#a855f7"/>
+    <circle cx="336" cy="176" r="9" fill="#a855f7"/>
+    <circle cx="336" cy="240" r="9" fill="#a855f7"/>
+
+    <circle cx="452" cy="148" r="9" fill="#22d3ee"/>
+    <circle cx="452" cy="210" r="9" fill="#22d3ee"/>
+  </g>
+
+  <!-- small training chart panel -->
+  <rect x="496" y="86" width="112" height="106" rx="12" fill="#0a0e20" fill-opacity="0.9" stroke="#2a2f52" stroke-width="1.2"/>
+  <text x="510" y="106" font-family="monospace" font-size="9" fill="#6b7391">accuracy</text>
+  <polyline points="510,178 526,168 542,158 558,142 574,132 592,126"
+            fill="none" stroke="url(#aiLine)" stroke-width="2.2" stroke-linecap="round"/>
+  <g fill="#22d3ee">
+    <circle cx="592" cy="126" r="3"/>
+  </g>
+  <line x1="510" y1="182" x2="596" y2="182" stroke="#2a2f52" stroke-width="1"/>
+
+  <!-- epochs panel -->
+  <rect x="496" y="204" width="112" height="72" rx="12" fill="#0a0e20" fill-opacity="0.9" stroke="#2a2f52" stroke-width="1.2"/>
+  <text x="510" y="224" font-family="monospace" font-size="9" fill="#6b7391">status</text>
+  <text x="510" y="244" font-family="monospace" font-size="11" fill="#cbd5e1">learning</text>
+  <rect x="510" y="254" width="84" height="6" rx="3" fill="#ffffff" fill-opacity="0.08"/>
+  <rect x="510" y="254" width="30" height="6" rx="3" fill="url(#aiLine)"/>
+
+  <!-- tech chips -->
+  <g font-family="monospace" font-size="11">
+    <rect x="40" y="300" width="66" height="26" rx="8" fill="#0e1428" stroke="#3b82f6" stroke-opacity="0.45"/>
+    <text x="73" y="317" fill="#93c5fd" text-anchor="middle">Python</text>
+
+    <rect x="114" y="300" width="56" height="26" rx="8" fill="#0e1428" stroke="#22d3ee" stroke-opacity="0.45"/>
+    <text x="142" y="317" fill="#a5f3fc" text-anchor="middle">AI/ML</text>
+  </g>
+</svg>
