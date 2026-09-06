@@ -10,7 +10,7 @@ A personal portfolio website for Aditya, a first-semester Computer Science Engin
 - Role: Computer Science Engineering Student
 - Status: First Semester
 - Education: Bachelor's Degree in Computer Science Engineering
-- Career goal: Aspiring AI/ML Engineer
+- Career goal: Become AI/ML Engineer
 
 ## What The Site Includes
 
