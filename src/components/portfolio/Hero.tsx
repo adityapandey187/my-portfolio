@@ -173,14 +173,14 @@ export const Hero = () => {
           >
             <span
               aria-hidden="true"
-              className="lg:hidden absolute left-1/2 -translate-x-1/2 bottom-[6%] select-none pointer-events-none whitespace-nowrap font-extrabold leading-none tracking-tight text-outline text-[24vw] opacity-80"
+              className="lg:hidden absolute left-1/2 -translate-x-1/2 bottom-[24%] select-none pointer-events-none whitespace-nowrap font-extrabold leading-none tracking-tight text-outline text-[24vw] opacity-80"
             >
               PORTFOLIO
             </span>
             <img
               src={cutout}
               alt="Aditya Pandey"
-              className="relative z-10 h-[38vh] sm:h-[48vh] lg:h-[66vh] w-auto object-contain object-bottom drop-shadow-[0_10px_60px_hsl(262_83%_62%/0.35)]"
+              className="relative z-10 h-[46vh] sm:h-[54vh] lg:h-[66vh] w-auto object-contain object-bottom drop-shadow-[0_10px_60px_hsl(262_83%_62%/0.35)]"
             />
           </motion.div>
         </div>
@@ -191,7 +191,7 @@ export const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-6 left-6 md:left-10 z-10"
+        className="hidden md:block absolute bottom-6 left-10 z-10"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}

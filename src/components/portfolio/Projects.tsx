@@ -3,7 +3,7 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { ExternalLink, Github } from "lucide-react";
 import techpathImg from "@/assets/techpath.jpg";
-import portfolioImg from "@/assets/portfolio-v1.jpg";
+import portfolioImg from "@/assets/portfolio-v2.jpg";
 
 const projects = [
   {
