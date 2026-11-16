@@ -27,9 +27,9 @@ export const Contact = () => {
   };
 
   const contactInfo = [
-    { icon: Mail, label: "Email", value: EMAIL, href: `mailto:${EMAIL}` },
-    { icon: MapPin, label: "Location", value: "Greater Noida, Uttar Pradesh", href: "" },
-    { icon: Github, label: "GitHub", value: "github.com/adityapandey187", href: "https://github.com/adityapandey187" },
+    { icon: Mail, label: "Email", href: `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}` },
+    { icon: MapPin, label: "Location", href: "https://www.google.com/maps/search/?api=1&query=Greater%20Noida%2C%20Uttar%20Pradesh" },
+    { icon: Github, label: "GitHub", href: "https://github.com/adityapandey187" },
   ];
 
   return (
@@ -82,8 +82,7 @@ export const Contact = () => {
                       <info.icon className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">{info.label}</p>
-                      <p className="font-medium text-foreground break-all">{info.value}</p>
+                      <p className="font-medium text-foreground">{info.label}</p>
                     </div>
                   </>
                 );
@@ -94,20 +93,15 @@ export const Contact = () => {
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ delay: 0.3 + index * 0.1 }}
                   >
-                    {info.href ? (
-                      <a
-                        href={info.href}
-                        target={info.href.startsWith("http") ? "_blank" : undefined}
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-4 p-4 rounded-xl bg-muted/50 hover:bg-accent transition-colors group"
-                      >
-                        {inner}
-                      </a>
-                    ) : (
-                      <div className="flex items-center gap-4 p-4 rounded-xl bg-muted/50 group">
-                        {inner}
-                      </div>
-                    )}
+                    <a
+                      href={info.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={info.label}
+                      className="flex items-center gap-4 p-4 rounded-xl bg-muted/50 hover:bg-accent transition-colors group"
+                    >
+                      {inner}
+                    </a>
                   </motion.div>
                 );
               })}
