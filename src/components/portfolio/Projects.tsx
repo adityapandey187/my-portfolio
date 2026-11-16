@@ -3,9 +3,21 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { ExternalLink, Github } from "lucide-react";
 import techpathImg from "@/assets/techpath.jpg";
+import wicketxImg from "@/assets/wicketx.jpg";
 import portfolioImg from "@/assets/portfolio-v2.jpg";
 
 const projects = [
+  {
+    id: 3,
+    title: "WicketX",
+    description:
+      "A live cricket scores web app: ball-by-ball commentary, full scorecards, series leaders, venue weather and trends, men's and women's career records, an On this day archive, ICC rankings, and BBC Sport cricket news - with dark mode and a mobile-first design.",
+    image: wicketxImg,
+    technologies: ["React", "JavaScript", "Render", "Cricsheet data", "Open-Meteo API"],
+    liveUrl: "https://wicketx.onrender.com",
+    githubUrl: "https://github.com/adityapandey187/wicketx-cricket",
+    featured: true,
+  },
   {
     id: 1,
     title: "TechPath",
