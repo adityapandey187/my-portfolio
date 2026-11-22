@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://adityapandey187.github.io/my-portfolio/sitemap.xml
