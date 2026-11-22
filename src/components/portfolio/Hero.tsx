@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 import cutout from "@/assets/aditya-cutout.webp";
 
 const roles = [
-  "CSE Student",
-  "Aspiring AI/ML Engineer",
   "Web Developer",
+  "UI/UX Enthusiast",
+  "AI Explorer",
   "Problem Solver",
 ];
 
@@ -49,7 +49,7 @@ export const Hero = () => {
   }, [displayText, isTyping, roleIndex]);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 dotted-bg opacity-40" />
 
@@ -92,18 +92,28 @@ export const Hero = () => {
             >
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-accent-foreground text-xs sm:text-sm font-medium">
                 <GraduationCap className="w-4 h-4" />
-                First Semester • CSE Foundations • Aspiring AI/ML Engineer
+                Available for website projects
               </span>
             </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.05 }}
+              className="text-lg md:text-xl text-muted-foreground mb-3"
+            >
+              Hi, I'm <span className="text-foreground font-semibold">Aditya Pandey</span>
+            </motion.p>
 
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold mb-6"
             >
-              Hi, I'm{" "}
-              <span className="text-gradient">Aditya Pandey</span>
+              Building{" "}
+              <span className="text-gradient">Digital Experiences</span>{" "}
+              That Matter.
             </motion.h1>
 
             <motion.div
@@ -111,8 +121,9 @@ export const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="h-10 md:h-12 flex items-center justify-center lg:justify-start mb-6"
+              aria-label="Web Developer, UI/UX Enthusiast, AI Explorer"
             >
-              <span className="text-lg sm:text-xl md:text-2xl font-mono text-muted-foreground">
+              <span className="text-lg sm:text-xl md:text-2xl font-mono text-muted-foreground" aria-hidden="true">
                 {"<"}
                 <span className="text-primary font-semibold">{displayText}</span>
                 <span className="animate-pulse">|</span>
@@ -126,9 +137,8 @@ export const Hero = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-8"
             >
-              A first-semester Computer Science Engineering student building strong
-              programming and CS foundations, with a long-term goal of becoming an{" "}
-              <span className="text-foreground font-medium">AI/ML engineer</span>.
+              I design and build modern, responsive websites for{" "}
+              <span className="text-foreground font-medium">individuals, creators and small businesses</span>.
             </motion.p>
 
             <motion.div
@@ -142,8 +152,8 @@ export const Hero = () => {
                 className="group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg rounded-full"
                 asChild
               >
-                <a href="#contact">
-                  Let's Connect
+                <a href="#projects">
+                  View My Work
                   <motion.span
                     className="ml-2 inline-block"
                     animate={{ x: [0, 4, 0] }}
@@ -159,7 +169,7 @@ export const Hero = () => {
                 className="px-8 py-6 text-lg rounded-full border-2"
                 asChild
               >
-                <a href="#projects">View My Work</a>
+                <a href="#contact">Discuss a Project</a>
               </Button>
             </motion.div>
           </div>
