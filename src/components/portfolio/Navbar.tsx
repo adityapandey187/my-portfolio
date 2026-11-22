@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import avatar from "@/assets/aditya-avatar.jpg";
 
 const navLinks = [
+  { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
   { name: "Journey", href: "#journey" },
@@ -99,6 +100,8 @@ export const Navbar = () => {
               size="icon"
               className="md:hidden"
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
             >
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
@@ -123,7 +126,16 @@ export const Navbar = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsOpen(false);
+                    window.history.pushState(null, "", link.href);
+                    window.setTimeout(() => {
+                      document
+                        .querySelector(link.href)
+                        ?.scrollIntoView({ behavior: "smooth" });
+                    }, 150);
+                  }}
                   className="block px-4 py-3 text-foreground hover:bg-accent rounded-lg transition-colors"
                 >
                   {link.name}

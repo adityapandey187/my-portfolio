@@ -9,6 +9,7 @@ const socialLinks = [
 ];
 
 const quickLinks = [
+  { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
   { name: "Journey", href: "#journey" },
@@ -34,7 +35,7 @@ export const Footer = () => {
               Aditya <span className="text-gradient">Pandey</span>
             </motion.a>
             <p className="text-muted-foreground mb-6 max-w-xs">
-              First-semester CSE student building strong foundations for a future in AI/ML.
+              Web developer building modern, responsive websites for individuals and small businesses. B.Tech CSE student.
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social) => (
@@ -76,7 +77,7 @@ export const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold text-foreground mb-4">Say Hello</h4>
             <p className="text-muted-foreground mb-4">
-              Questions, study groups, or opportunities - my inbox is open.
+              Have a website idea or a project in mind? Let's talk about building it.
             </p>
             <motion.a
               href="#contact"
