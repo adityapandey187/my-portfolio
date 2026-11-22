@@ -74,7 +74,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
       <div className="relative aspect-video overflow-hidden bg-muted">
         <img
           src={project.image}
-          alt={project.title}
+          alt={`Screenshot of ${project.title}`}
           loading="lazy"
           decoding="async"
           className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
