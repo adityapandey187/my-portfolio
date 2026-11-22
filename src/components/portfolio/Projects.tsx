@@ -75,6 +75,8 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
         <img
           src={project.image}
           alt={project.title}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

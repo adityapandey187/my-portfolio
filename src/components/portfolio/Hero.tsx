@@ -121,7 +121,7 @@ export const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="h-10 md:h-12 flex items-center justify-center lg:justify-start mb-6"
-              aria-label="Web Developer, UI/UX Enthusiast, AI Explorer"
+              role="text" aria-label="Web Developer, UI/UX Enthusiast, AI Explorer"
             >
               <span className="text-lg sm:text-xl md:text-2xl font-mono text-muted-foreground" aria-hidden="true">
                 {"<"}
@@ -190,6 +190,10 @@ export const Hero = () => {
             <img
               src={cutout}
               alt="Aditya Pandey"
+              width={640}
+              height={792}
+              fetchPriority="high"
+              decoding="async"
               className="relative z-10 h-[46vh] sm:h-[54vh] lg:h-[66vh] w-auto object-contain object-bottom drop-shadow-[0_10px_60px_hsl(262_83%_62%/0.35)]"
             />
           </motion.div>

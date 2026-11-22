@@ -55,6 +55,9 @@ export const Navbar = () => {
             <img
               src={avatar}
               alt="Aditya Pandey"
+              width={40}
+              height={40}
+              decoding="async"
               className="h-9 w-9 md:h-10 md:w-10 rounded-full object-cover object-top ring-2 ring-primary/50"
             />
             <span className="font-bold text-lg tracking-tight">
