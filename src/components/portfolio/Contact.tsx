@@ -1,10 +1,6 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef, useState } from "react";
-import { Send, Mail, MapPin, Github } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { Reveal } from "./Reveal";
 
 const EMAIL = "adityapandey451807@gmail.com";
 
@@ -28,12 +24,10 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type Errors = Partial<Record<"name" | "email" | "projectType" | "budget" | "message", string>>;
 
-const selectClass =
-  "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
+const field =
+  "w-full rounded-none border-0 border-b border-input bg-transparent px-0 py-3 text-base text-foreground placeholder:text-muted-foreground/70 transition-colors focus:border-foreground focus:outline-none focus-visible:outline-none";
 
 export const Contact = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -90,130 +84,95 @@ export const Contact = () => {
     }, 400);
   };
 
-  const contactInfo = [
-    { icon: Mail, label: "Email", href: `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}` },
-    { icon: MapPin, label: "Location", href: "https://www.google.com/maps/search/?api=1&query=Greater%20Noida%2C%20Uttar%20Pradesh" },
-    { icon: Github, label: "GitHub", href: "https://github.com/adityapandey187" },
-  ];
+  const Err = ({ id, msg }: { id: string; msg?: string }) =>
+    msg ? (
+      <p id={id} role="alert" className="mt-2 text-sm text-destructive">
+        {msg}
+      </p>
+    ) : null;
 
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="section-padding relative overflow-hidden" ref={ref}>
-      <div className="blob w-96 h-96 -bottom-48 -left-48 opacity-20" />
-      <div className="blob w-80 h-80 -top-40 -right-40 opacity-20 animate-delay-300" />
-
-      <div className="container-custom relative">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-4">
-            Get In Touch
-          </span>
-          <h2 id="contact-heading" className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Have an Idea? <span className="text-gradient">Let's Build It Together.</span>
+    <section id="contact" aria-labelledby="contact-heading" className="section-space hairline">
+      <div className="wrap">
+        <Reveal>
+          <p className="eyebrow mb-5">Contact</p>
+          <h2 id="contact-heading" className="display-xl max-w-[14ch]">
+            Have a project in mind? Let's build something meaningful<span className="text-brand">.</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Tell me about your project and I'll get back to you by email.
-          </p>
-        </motion.div>
+        </Reveal>
 
-        <div className="grid lg:grid-cols-5 gap-12 items-start">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-2 space-y-8"
-          >
-            <div>
-              <h3 className="text-2xl font-bold text-foreground mb-4">
-                Always happy to talk
-              </h3>
-              <p className="text-muted-foreground">
-                Whether it's a website for your business, a portfolio, a landing page, or just a
-                question about my projects, my inbox is open.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              {contactInfo.map((info, index) => (
-                <motion.div
-                  key={info.label}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.3 + index * 0.1 }}
+        <div className="mt-20 grid gap-16 md:grid-cols-12 md:gap-16">
+          <Reveal className="md:col-span-4">
+            <p className="max-w-xs text-muted-foreground">
+              Tell me about your project and I'll get back to you by email.
+            </p>
+            <ul className="mt-10 space-y-5">
+              <li>
+                <p className="eyebrow mb-1">Email</p>
+                <a href={`mailto:${EMAIL}`} className="link-u break-all">
+                  {EMAIL}
+                </a>
+              </li>
+              <li>
+                <p className="eyebrow mb-1">GitHub</p>
+                <a href="https://github.com/adityapandey187" target="_blank" rel="noopener noreferrer" className="link-u">
+                  github.com/adityapandey187 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </li>
+              <li>
+                <p className="eyebrow mb-1">LinkedIn</p>
+                <a
+                  href="https://www.linkedin.com/in/aditya-pandey-0ba208427/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-u"
                 >
-                  <a
-                    href={info.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={info.label}
-                    className="flex items-center gap-4 p-4 rounded-xl bg-muted/50 hover:bg-accent transition-colors group"
-                  >
-                    <div className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                      <info.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-medium text-foreground">{info.label}</p>
-                    </div>
-                  </a>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+                  Aditya Pandey <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </li>
+            </ul>
+          </Reveal>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="lg:col-span-3"
-          >
-            <form onSubmit={handleSubmit} noValidate className="glass-card p-8 rounded-2xl space-y-6">
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label htmlFor="contact-name" className="text-sm font-medium text-foreground">
-                    Full Name *
-                  </label>
-                  <Input
+          <Reveal delay={0.1} className="md:col-span-8">
+            <form onSubmit={handleSubmit} noValidate className="relative space-y-9">
+              <div className="grid gap-9 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="contact-name" className="eyebrow">Full Name *</label>
+                  <input
                     id="contact-name"
+                    className={field}
                     value={formData.name}
                     onChange={set("name")}
                     placeholder="Your name"
+                    autoComplete="name"
                     aria-invalid={!!errors.name}
                     aria-describedby={errors.name ? "err-name" : undefined}
                   />
-                  {errors.name && (
-                    <p id="err-name" role="alert" className="text-sm text-destructive">{errors.name}</p>
-                  )}
+                  <Err id="err-name" msg={errors.name} />
                 </div>
-                <div className="space-y-2">
-                  <label htmlFor="contact-email" className="text-sm font-medium text-foreground">
-                    Email Address *
-                  </label>
-                  <Input
+                <div>
+                  <label htmlFor="contact-email" className="eyebrow">Email Address *</label>
+                  <input
                     id="contact-email"
                     type="email"
+                    className={field}
                     value={formData.email}
                     onChange={set("email")}
                     placeholder="you@example.com"
+                    autoComplete="email"
                     aria-invalid={!!errors.email}
                     aria-describedby={errors.email ? "err-email" : undefined}
                   />
-                  {errors.email && (
-                    <p id="err-email" role="alert" className="text-sm text-destructive">{errors.email}</p>
-                  )}
+                  <Err id="err-email" msg={errors.email} />
                 </div>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label htmlFor="contact-type" className="text-sm font-medium text-foreground">
-                    Project Type *
-                  </label>
+              <div className="grid gap-9 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="contact-type" className="eyebrow">Project Type *</label>
                   <select
                     id="contact-type"
-                    className={selectClass}
+                    className={field}
                     value={formData.projectType}
                     onChange={set("projectType")}
                     aria-invalid={!!errors.projectType}
@@ -224,17 +183,13 @@ export const Contact = () => {
                       <option key={t} value={t}>{t}</option>
                     ))}
                   </select>
-                  {errors.projectType && (
-                    <p id="err-type" role="alert" className="text-sm text-destructive">{errors.projectType}</p>
-                  )}
+                  <Err id="err-type" msg={errors.projectType} />
                 </div>
-                <div className="space-y-2">
-                  <label htmlFor="contact-budget" className="text-sm font-medium text-foreground">
-                    Estimated Budget *
-                  </label>
+                <div>
+                  <label htmlFor="contact-budget" className="eyebrow">Estimated Budget *</label>
                   <select
                     id="contact-budget"
-                    className={selectClass}
+                    className={field}
                     value={formData.budget}
                     onChange={set("budget")}
                     aria-invalid={!!errors.budget}
@@ -245,28 +200,23 @@ export const Contact = () => {
                       <option key={b} value={b}>{b}</option>
                     ))}
                   </select>
-                  {errors.budget && (
-                    <p id="err-budget" role="alert" className="text-sm text-destructive">{errors.budget}</p>
-                  )}
+                  <Err id="err-budget" msg={errors.budget} />
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label htmlFor="contact-message" className="text-sm font-medium text-foreground">
-                  Project Description *
-                </label>
-                <Textarea
+              <div>
+                <label htmlFor="contact-message" className="eyebrow">Project Description *</label>
+                <textarea
                   id="contact-message"
+                  className={`${field} resize-y`}
+                  rows={4}
                   value={formData.message}
                   onChange={set("message")}
                   placeholder="What do you want to build? A sentence or two is enough to start."
-                  rows={5}
                   aria-invalid={!!errors.message}
                   aria-describedby={errors.message ? "err-message" : undefined}
                 />
-                {errors.message && (
-                  <p id="err-message" role="alert" className="text-sm text-destructive">{errors.message}</p>
-                )}
+                <Err id="err-message" msg={errors.message} />
               </div>
 
               {/* Honeypot field - hidden from humans */}
@@ -282,27 +232,25 @@ export const Contact = () => {
                 />
               </div>
 
-              <Button type="submit" size="lg" disabled={submitting} className="w-full">
-                {submitting ? "Preparing your email..." : (
-                  <>
-                    <Send className="w-4 h-4 mr-2" aria-hidden="true" />
-                    Send Project Inquiry
-                  </>
-                )}
-              </Button>
-
-              <p className="text-xs text-muted-foreground text-center">
-                This opens your email app with the message filled in - the message is only sent
-                when you press send there.
-              </p>
+              <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+                <button type="submit" disabled={submitting} className="btn btn-solid disabled:opacity-60">
+                  {submitting ? "Preparing your email..." : (
+                    <>
+                      Send Project Inquiry <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    </>
+                  )}
+                </button>
+                <p className="max-w-xs text-xs text-muted-foreground">
+                  This opens your email app with the message filled in. It is only sent when you press send there.
+                </p>
+              </div>
               {status === "opened" && (
-                <p role="status" className="text-sm text-primary text-center">
-                  Your email app should have opened with your message filled in. Press send there
-                  to deliver it.
+                <p role="status" className="text-sm text-brand">
+                  Your email app should have opened with your message filled in. Press send there to deliver it.
                 </p>
               )}
             </form>
-          </motion.div>
+          </Reveal>
         </div>
       </div>
     </section>

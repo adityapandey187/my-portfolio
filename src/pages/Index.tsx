@@ -1,9 +1,10 @@
 import { Navbar } from "@/components/portfolio/Navbar";
 import { Hero } from "@/components/portfolio/Hero";
 import { About } from "@/components/portfolio/About";
-import { Skills } from "@/components/portfolio/Skills";
-import { Education } from "@/components/portfolio/Education";
 import { Projects } from "@/components/portfolio/Projects";
+import { Process } from "@/components/portfolio/Process";
+import { Skills } from "@/components/portfolio/Skills";
+import { Faq } from "@/components/portfolio/Faq";
 import { Services } from "@/components/portfolio/Services";
 import { Contact } from "@/components/portfolio/Contact";
 import { Footer } from "@/components/portfolio/Footer";
@@ -27,11 +28,12 @@ const Index = () => {
       <Navbar />
       <main>
         <Hero />
-        <About />
-        <Skills />
-        <Education />
         <Projects />
+        <About />
+        <Process />
         <Services />
+        <Skills />
+        <Faq />
         <Contact />
       </main>
       <Footer />

@@ -1,125 +1,100 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import { Code2, Palette, Sparkles, BookOpen } from "lucide-react";
+import { Reveal } from "./Reveal";
 
-// Honest levels, shown as words only (no percentages or bars).
-const skillCategories = [
+// Levels are honest words only (no percentages). Skills come from this codebase and his project stack.
+const groups = [
   {
-    title: "Frontend Development",
-    icon: Code2,
-    color: "from-violet-500 to-purple-500",
-    skills: [
-      { name: "HTML", level: "Learning" },
-      { name: "CSS & Tailwind CSS", level: "Learning" },
-      { name: "JavaScript", level: "Learning" },
-      { name: "React & TypeScript", level: "Building" },
-      { name: "Responsive Web Design", level: "Building" },
+    title: "Frontend",
+    items: [
+      ["HTML", "Learning"],
+      ["CSS & Tailwind CSS", "Learning"],
+      ["JavaScript", "Learning"],
+      ["React & TypeScript", "Building"],
+      ["Responsive Web Design", "Building"],
     ],
   },
   {
-    title: "UI/UX Design",
-    icon: Palette,
-    color: "from-fuchsia-500 to-purple-500",
-    skills: [
-      { name: "Interface Design", level: "Learning" },
-      { name: "Layout Design", level: "Learning" },
+    title: "UI/UX",
+    items: [
+      ["Interface Design", "Learning"],
+      ["Layout Design", "Learning"],
     ],
   },
   {
-    title: "AI & Development Tools",
-    icon: Sparkles,
-    color: "from-purple-500 to-indigo-500",
-    skills: [
-      { name: "AI-Assisted Development", level: "Building" },
-      { name: "Git & GitHub", level: "Starting" },
-      { name: "Code Editor", level: "Learning" },
+    title: "AI & Dev Tools",
+    items: [
+      ["AI-Assisted Development", "Building"],
+      ["Git & GitHub", "Starting"],
+      ["Code Editor", "Learning"],
     ],
   },
   {
-    title: "Learning Foundations",
-    icon: BookOpen,
-    color: "from-violet-500 to-fuchsia-500",
-    skills: [
-      { name: "C Programming", level: "Learning" },
-      { name: "Python Basics", level: "Starting" },
-      { name: "Mathematics for CS", level: "Building" },
-      { name: "AI Concepts", level: "Exploring" },
-      { name: "Machine Learning Basics", level: "Future goal" },
+    title: "Foundations",
+    items: [
+      ["C Programming", "Learning"],
+      ["Python Basics", "Starting"],
+      ["Mathematics for CS", "Building"],
+      ["AI Concepts", "Exploring"],
+      ["Machine Learning Basics", "Future goal"],
     ],
   },
 ];
 
-const SkillCard = ({ category, index }: { category: typeof skillCategories[0]; index: number }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const Icon = category.icon;
+const journey = [
+  { t: "Web development learning", d: "B.Tech CSE student learning HTML, CSS, JavaScript and React alongside programming fundamentals.", p: "Now" },
+  { t: "Personal projects", d: "WicketX, a live cricket scores web app, and TechPath, a learning platform for tech students with an AI tutor.", p: "Built" },
+  { t: "AI-powered development", d: "Exploring how modern AI tools can speed up building and improve web projects.", p: "Exploring" },
+  { t: "Building practical applications", d: "Responsive websites, including this portfolio, with the goal of building sites for individuals and small businesses.", p: "Ongoing" },
+  { t: "Continued technical improvement", d: "Long-term goal in artificial intelligence and machine learning, built on a maths and Python foundation.", p: "Next" },
+];
 
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="glass-card p-6 rounded-2xl glow-card group h-full"
-    >
-      <h3
-        className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r ${category.color} text-white text-sm font-medium mb-6`}
-      >
-        <Icon className="w-4 h-4" aria-hidden="true" />
-        {category.title}
-      </h3>
+export const Skills = () => (
+  <section id="skills" aria-labelledby="skills-heading" className="section-space hairline">
+    <div className="wrap">
+      <Reveal>
+        <p className="eyebrow mb-5">Skills &amp; Learning</p>
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <h2 id="skills-heading" className="display-lg max-w-[14ch]">
+            Stack &amp; journey.
+          </h2>
+          <p className="max-w-sm text-muted-foreground">
+            Honest levels, no exaggeration: what I use to build websites and what I'm still learning.
+          </p>
+        </div>
+      </Reveal>
 
-      <ul className="space-y-3" aria-label={`${category.title} skills`}>
-        {category.skills.map((skill) => (
-          <li
-            key={skill.name}
-            className="flex justify-between items-center gap-3 py-2 border-b border-border/40 last:border-0"
-          >
-            <span className="text-sm font-medium text-foreground">{skill.name}</span>
-            <span className="shrink-0 px-2.5 py-0.5 text-xs rounded-full bg-accent text-accent-foreground">
-              {skill.level}
-            </span>
+      <div className="mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+        {groups.map((g, i) => (
+          <Reveal key={g.title} delay={i * 0.06}>
+            <h3 className="mb-4 border-b border-border pb-3 font-display text-lg">{g.title}</h3>
+            <ul className="space-y-3">
+              {g.items.map(([name, level]) => (
+                <li key={name} className="flex items-baseline justify-between gap-3 text-[0.95rem]">
+                  <span>{name}</span>
+                  <span className="shrink-0 text-xs text-muted-foreground">{level}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        ))}
+      </div>
+
+      <Reveal className="mt-24">
+        <h3 className="display-md mb-10">My learning &amp; building journey</h3>
+      </Reveal>
+      <ol>
+        {journey.map((j, i) => (
+          <li key={j.t}>
+            <Reveal delay={i * 0.04}>
+              <div className="grid gap-2 border-t border-border py-6 md:grid-cols-12 md:gap-8">
+                <span className="text-sm text-brand md:col-span-2">{j.p}</span>
+                <h4 className="font-display text-xl md:col-span-4">{j.t}</h4>
+                <p className="text-muted-foreground md:col-span-6">{j.d}</p>
+              </div>
+            </Reveal>
           </li>
         ))}
-      </ul>
-    </motion.div>
-  );
-};
-
-export const Skills = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  return (
-    <section id="skills" aria-labelledby="skills-heading" className="section-padding relative" ref={ref}>
-      {/* Background decoration */}
-      <div className="absolute inset-0 dotted-bg opacity-30" />
-
-      <div className="container-custom relative">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-4">
-            What I'm Learning
-          </span>
-          <h2 id="skills-heading" className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Skills & <span className="text-gradient">Foundations</span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Honest levels, no exaggeration - what I use to build websites and what I'm still learning.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {skillCategories.map((category, index) => (
-            <SkillCard key={category.title} category={category} index={index} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
+        <li aria-hidden="true" className="border-t border-border" />
+      </ol>
+    </div>
+  </section>
+);

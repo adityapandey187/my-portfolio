@@ -1,221 +1,82 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowDown, Code2, Terminal, Braces, GraduationCap } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import cutout from "@/assets/aditya-cutout.webp";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
+import wicketx from "@/assets/wx-shot.webp";
+import techpath from "@/assets/tp-shot.webp";
+import concept from "@/assets/cafe-shot.webp";
+import { Line } from "./Reveal";
 
-const roles = [
-  "Web Developer",
-  "UI/UX Enthusiast",
-  "AI Explorer",
-  "Problem Solver",
-];
-
-const floatingIcons = [
-  { Icon: Code2, delay: 0, x: "4%", y: "18%" },
-  { Icon: Terminal, delay: 0.5, x: "90%", y: "15%" },
-  { Icon: Braces, delay: 1, x: "46%", y: "12%" },
+const thumbs = [
+  { src: wicketx, alt: "WicketX live cricket scores homepage", label: "WicketX", href: "#projects", rot: "md:-rotate-2 md:translate-y-6" },
+  { src: techpath, alt: "TechPath learning platform sign-in screen", label: "TechPath", href: "#projects", rot: "md:translate-y-0" },
+  { src: concept, alt: "Business website concept demo, a fictional cafe", label: "Concept demo", href: "#projects", rot: "md:rotate-2 md:translate-y-8" },
 ];
 
 export const Hero = () => {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [displayText, setDisplayText] = useState("");
-  const [isTyping, setIsTyping] = useState(true);
-
-  useEffect(() => {
-    const currentRole = roles[roleIndex];
-
-    if (isTyping) {
-      if (displayText.length < currentRole.length) {
-        const timeout = setTimeout(() => {
-          setDisplayText(currentRole.slice(0, displayText.length + 1));
-        }, 80);
-        return () => clearTimeout(timeout);
-      } else {
-        const timeout = setTimeout(() => setIsTyping(false), 2000);
-        return () => clearTimeout(timeout);
-      }
-    } else {
-      if (displayText.length > 0) {
-        const timeout = setTimeout(() => {
-          setDisplayText(displayText.slice(0, -1));
-        }, 40);
-        return () => clearTimeout(timeout);
-      } else {
-        setRoleIndex((prev) => (prev + 1) % roles.length);
-        setIsTyping(true);
-      }
-    }
-  }, [displayText, isTyping, roleIndex]);
+  const reduce = useReducedMotion();
+  const fade = (delay: number) =>
+    reduce
+      ? {}
+      : { initial: { opacity: 0, y: 18 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] as const } };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 dotted-bg opacity-40" />
+    <section id="home" aria-labelledby="hero-heading" className="relative pt-32 md:pt-44">
+      <div className="wrap">
+        <motion.p {...fade(0)} className="eyebrow mb-8 flex items-center gap-3">
+          <span className="inline-block h-px w-8 bg-foreground/40" aria-hidden="true" />
+          Web Developer &amp; Digital Creator
+        </motion.p>
 
-      {/* Animated Blobs */}
-      <div className="blob w-96 h-96 -top-48 -left-48" />
-      <div className="blob w-80 h-80 -bottom-40 -right-40 animate-delay-200" />
+        <h1 id="hero-heading" className="display-xl max-w-[16ch]">
+          <Line delay={0.1}>Designing &amp;</Line>
+          <Line delay={0.2}>Building Digital</Line>
+          <Line delay={0.3}>
+            Experiences<span className="text-brand">.</span>
+          </Line>
+        </h1>
 
-      {/* Floating Icons */}
-      {floatingIcons.map(({ Icon, delay, x, y }, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 0.2, scale: 1 }}
-          transition={{ delay: delay + 0.5, duration: 0.5 }}
-          className="absolute floating hidden md:block"
-          style={{ left: x, top: y }}
-        >
-          <Icon className="w-12 h-12 text-primary/30" />
-        </motion.div>
-      ))}
-
-      {/* Giant outline text behind the photo */}
-      <div
-        aria-hidden="true"
-        className="hidden lg:block absolute bottom-0 left-1/2 -translate-x-1/2 select-none pointer-events-none whitespace-nowrap font-extrabold leading-none tracking-tight text-outline text-[19vw] opacity-70"
-      >
-        PORTFOLIO
-      </div>
-
-      {/* Content */}
-      <div className="container-custom relative z-10 w-full px-4 pt-28 lg:pt-20">
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
-          {/* Text side */}
-          <div className="text-center lg:text-left order-1">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-6"
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-accent-foreground text-xs sm:text-sm font-medium">
-                <GraduationCap className="w-4 h-4" />
-                Available for website projects
-              </span>
-            </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.05 }}
-              className="text-lg md:text-xl text-muted-foreground mb-3"
-            >
-              Hi, I'm <span className="text-foreground font-semibold">Aditya Pandey</span>
-            </motion.p>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold mb-6"
-            >
-              Building{" "}
-              <span className="text-gradient">Digital Experiences</span>{" "}
-              That Matter.
-            </motion.h1>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="h-10 md:h-12 flex items-center justify-center lg:justify-start mb-6"
-              role="text" aria-label="Web Developer, UI/UX Enthusiast, AI Explorer"
-            >
-              <span className="text-lg sm:text-xl md:text-2xl font-mono text-muted-foreground" aria-hidden="true">
-                {"<"}
-                <span className="text-primary font-semibold">{displayText}</span>
-                <span className="animate-pulse">|</span>
-                {" />"}
-              </span>
-            </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-8"
-            >
-              I design and build modern, responsive websites for{" "}
-              <span className="text-foreground font-medium">individuals, creators and small businesses</span>.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
-            >
-              <Button
-                size="lg"
-                className="group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg rounded-full"
-                asChild
-              >
-                <a href="#projects">
-                  View My Work
-                  <motion.span
-                    className="ml-2 inline-block"
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.5 }}
-                  >
-                    →
-                  </motion.span>
-                </a>
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="px-8 py-6 text-lg rounded-full border-2"
-                asChild
-              >
-                <a href="#contact">Discuss a Project</a>
-              </Button>
-            </motion.div>
-          </div>
-
-          {/* Photo side */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="order-2 relative flex items-end justify-center lg:justify-end"
-          >
-            <span
-              aria-hidden="true"
-              className="lg:hidden absolute left-1/2 -translate-x-1/2 bottom-[24%] select-none pointer-events-none whitespace-nowrap font-extrabold leading-none tracking-tight text-outline text-[24vw] opacity-80"
-            >
-              PORTFOLIO
-            </span>
-            <img
-              src={cutout}
-              alt="Aditya Pandey"
-              width={640}
-              height={792}
-              fetchPriority="high"
-              decoding="async"
-              className="relative z-10 h-[46vh] sm:h-[54vh] lg:h-[66vh] w-auto object-contain object-bottom drop-shadow-[0_10px_60px_hsl(262_83%_62%/0.35)]"
-            />
+        <div className="mt-10 grid items-end gap-10 md:mt-14 md:grid-cols-12">
+          <motion.p {...fade(0.55)} className="max-w-xl text-lg text-muted-foreground md:col-span-6 md:text-xl">
+            I'm Aditya Pandey, a developer and design enthusiast creating thoughtful websites and practical digital
+            products.
+          </motion.p>
+          <motion.div {...fade(0.7)} className="flex flex-wrap gap-3 md:col-span-6 md:justify-end">
+            <a href="#projects" className="btn btn-solid">
+              Explore My Work <ArrowDown className="h-4 w-4" aria-hidden="true" />
+            </a>
+            <a href="#contact" className="btn btn-ghost">
+              Start a Project <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </a>
           </motion.div>
         </div>
-      </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="hidden md:block absolute bottom-6 left-10 z-10"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="flex flex-col items-center gap-2 text-muted-foreground"
+        {/* Real project screenshots, loosely arranged */}
+        <motion.ul
+          {...fade(0.85)}
+          className="mt-16 grid grid-cols-1 gap-5 pb-4 sm:grid-cols-3 md:mt-24"
+          aria-label="Selected projects preview"
         >
-          <span className="text-sm font-medium">Scroll to explore</span>
-          <ArrowDown className="w-5 h-5" />
-        </motion.div>
-      </motion.div>
+          {thumbs.map((t) => (
+            <li key={t.label} className={`transition-transform duration-700 ${t.rot}`}>
+              <a href={t.href} className="group block">
+                <div className="aspect-[16/11] overflow-hidden rounded-xl border border-border bg-card">
+                  <img
+                    src={t.src}
+                    alt={t.alt}
+                    width={1280}
+                    height={720}
+                    fetchPriority="low"
+                    className="h-full w-full object-cover object-top grayscale-[0.85] transition-all duration-700 group-hover:scale-[1.04] group-hover:grayscale-0"
+                  />
+                </div>
+                <p className="mt-3 flex items-center justify-between text-sm text-muted-foreground">
+                  <span>{t.label}</span>
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+                </p>
+              </a>
+            </li>
+          ))}
+        </motion.ul>
+      </div>
     </section>
   );
 };

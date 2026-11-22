@@ -1,214 +1,126 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import { ExternalLink, Github, BookOpen } from "lucide-react";
-import wicketxImg from "@/assets/wx-shot.webp";
-import techpathImg from "@/assets/tp-shot.webp";
-import portfolioImg from "@/assets/pf-shot.webp";
-import conceptImg from "@/assets/cafe-shot.webp";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { projects, type Project } from "@/data/projects";
+import { Reveal } from "./Reveal";
 
-const projects = [
-  {
-    id: 3,
-    title: "WicketX",
-    description:
-      "A free live cricket scores platform: ball-by-ball commentary, full scorecards, schedules, series, teams, player compare, ICC rankings, career records and cricket news - with dark mode, English and Hindi, and a mobile-first design.",
-    image: wicketxImg,
-    technologies: ["React", "JavaScript", "Python", "FastAPI", "Render"],
-    liveUrl: "https://wicketx.onrender.com",
-    githubUrl: "https://github.com/adityapandey187/wicketx-cricket",
-    caseStudy: "wicketx",
-    badge: "Featured",
-  },
-  {
-    id: 1,
-    title: "TechPath",
-    description:
-      "A learning platform for tech students: learning roadmaps, career pages with salary ranges, project ideas, curated resources, and PathAI, an AI assistant - with accounts that save your progress.",
-    image: techpathImg,
-    technologies: ["React", "TypeScript", "Vite", "Supabase", "Gemini API", "Vercel"],
-    liveUrl: "https://techpath-mu.vercel.app",
-    githubUrl: "",
-    caseStudy: "techpath",
-    badge: "Featured",
-  },
-  {
-    id: 2,
-    title: "Personal Portfolio Website",
-    description:
-      "My personal portfolio (this site): a dark violet single-page site presenting my projects, skills and contact information. The first version was plain HTML/CSS/JavaScript.",
-    image: portfolioImg,
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Vite", "GitHub Pages"],
-    liveUrl: "https://adityapandey187.github.io/my-portfolio/",
-    githubUrl: "https://github.com/adityapandey187/my-portfolio",
-    caseStudy: "portfolio",
-    badge: "Featured",
-  },
-  {
-    id: 4,
-    title: "Business Website Concept",
-    description:
-      "A concept demo of a small-business website: a fictional cafe site showing the kind of clean, responsive page I can build for a local business. Not client work.",
-    image: conceptImg,
-    technologies: ["HTML", "CSS", "JavaScript"],
-    liveUrl: "concepts/business-site.html",
-    githubUrl: "",
-    caseStudy: "",
-    badge: "Concept demo",
-  },
-];
-
-const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: number }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="glass-card rounded-2xl overflow-hidden group"
+const Links = ({ p }: { p: Project }) => (
+  <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+    <a
+      href={p.liveUrl}
+      target={p.liveUrl.startsWith("http") ? "_blank" : undefined}
+      rel="noopener noreferrer"
+      className="link-u"
     >
-      {/* Image container */}
-      <div className="relative aspect-video overflow-hidden bg-muted">
-        <img
-          src={project.image}
-          alt={`Screenshot of ${project.title}`}
-          loading="lazy"
-          decoding="async"
-          className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      Live Demo <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+    </a>
+    {p.caseStudy && (
+      <a href={`#/case-studies/${p.caseStudy}`} className="link-u">
+        Case Study <ArrowRight className="h-4 w-4" aria-hidden="true" />
+      </a>
+    )}
+    {p.githubUrl && (
+      <a href={p.githubUrl} target="_blank" rel="noopener noreferrer" className="link-u text-muted-foreground hover:text-foreground">
+        GitHub <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+      </a>
+    )}
+  </div>
+);
 
-        {/* Overlay buttons */}
-        <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
-          {project.liveUrl && (
-            <motion.a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Open ${project.title} live`}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="p-3 rounded-full bg-primary text-primary-foreground"
-            >
-              <ExternalLink className="w-5 h-5" />
-            </motion.a>
-          )}
-          {project.githubUrl && (
-            <motion.a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`View ${project.title} source on GitHub`}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="p-3 rounded-full bg-foreground text-background"
-            >
-              <Github className="w-5 h-5" />
-            </motion.a>
-          )}
-        </div>
-
-        {/* Featured badge */}
-        {project.badge && (
-          <div className="absolute top-4 left-4">
-            <span className="px-3 py-1 text-xs font-medium rounded-full bg-primary text-primary-foreground">
-              {project.badge}
-            </span>
-          </div>
-        )}
-      </div>
-
-      {/* Content */}
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-gradient transition-colors">
-          {project.title}
-        </h3>
-        <p className="text-muted-foreground text-sm mb-4">
-          {project.description}
-        </p>
-
-        {/* Technologies */}
-        <div className="flex flex-wrap gap-2 mb-5">
-          {project.technologies.map((tech) => (
-            <span
-              key={tech}
-              className="px-2 py-1 text-xs rounded-md bg-accent text-accent-foreground font-mono"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        {/* Action buttons */}
-        <div className="flex flex-wrap gap-2">
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target={project.liveUrl.startsWith("http") ? "_blank" : undefined}
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
-            >
-              <ExternalLink className="w-4 h-4" aria-hidden="true" />
-              Live Demo
-            </a>
-          )}
-          {project.caseStudy && (
-            <a
-              href={`#/case-studies/${project.caseStudy}`}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-primary/40 text-foreground text-sm font-medium hover:bg-primary/10 transition-colors"
-            >
-              <BookOpen className="w-4 h-4" aria-hidden="true" />
-              Case Study
-            </a>
-          )}
-          {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-border text-muted-foreground text-sm font-medium hover:text-foreground hover:border-foreground/40 transition-colors"
-            >
-              <Github className="w-4 h-4" aria-hidden="true" />
-              GitHub
-            </a>
-          )}
-        </div>
-      </div>
-    </motion.div>
+const Image = ({ p, ratio }: { p: Project; ratio: string }) => {
+  const reduce = useReducedMotion();
+  return (
+    <a
+      href={p.liveUrl}
+      target={p.liveUrl.startsWith("http") ? "_blank" : undefined}
+      rel="noopener noreferrer"
+      aria-label={`Open ${p.title}`}
+      className={`group relative block overflow-hidden rounded-2xl border border-border bg-card ${ratio}`}
+    >
+      <motion.img
+        src={p.image}
+        alt={p.alt}
+        width={1280}
+        height={720}
+        loading="lazy"
+        decoding="async"
+        whileHover={reduce ? undefined : { scale: 1.035 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="h-full w-full object-cover object-top grayscale-[0.8] transition-[filter] duration-700 group-hover:grayscale-0"
+      />
+      <span className="pointer-events-none absolute bottom-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-background/90 px-4 py-2 text-sm font-medium opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100">
+        View live <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+      </span>
+      {p.concept && (
+        <span className="absolute left-4 top-4 rounded-full bg-background/90 px-3 py-1 text-xs font-medium backdrop-blur">
+          Concept demo
+        </span>
+      )}
+    </a>
   );
 };
 
+const Meta = ({ p }: { p: Project }) => (
+  <>
+    <p className="eyebrow mb-4 flex items-center gap-3">
+      <span className="text-brand">{p.index}</span>
+      <span aria-hidden="true" className="h-px w-6 bg-foreground/30" />
+      {p.category}
+    </p>
+    <h3 className={p.size === "large" ? "display-lg" : "display-md"}>{p.title}</h3>
+    <p className="mt-5 max-w-prose text-muted-foreground">{p.description}</p>
+    <ul className="mt-6 flex flex-wrap gap-2" aria-label={`${p.title} technologies`}>
+      {p.tech.map((t) => (
+        <li key={t} className="chip">
+          {t}
+        </li>
+      ))}
+    </ul>
+    <Links p={p} />
+  </>
+);
+
 export const Projects = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
+  const large = projects.filter((p) => p.size === "large");
+  const small = projects.filter((p) => p.size === "small");
   return (
-    <section id="projects" className="section-padding relative" ref={ref}>
-      <div className="container-custom">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-4">
-            Featured Work
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            My <span className="text-gradient">Projects</span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Real projects I've built, plus one clearly labelled concept demo - more coming as I keep learning.
-          </p>
-        </motion.div>
+    <section id="projects" aria-labelledby="projects-heading" className="section-space">
+      <div className="wrap">
+        <Reveal>
+          <p className="eyebrow mb-5">Selected Work</p>
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <h2 id="projects-heading" className="display-lg max-w-[14ch]">
+              Projects I've built.
+            </h2>
+            <p className="max-w-sm text-muted-foreground">
+              Real projects with live links, plus one clearly labelled concept demo.
+            </p>
+          </div>
+        </Reveal>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
+        <div className="mt-16 space-y-24 md:mt-24 md:space-y-36">
+          {large.map((p, i) => (
+            <article key={p.id} className="grid items-center gap-8 md:grid-cols-12 md:gap-14">
+              <Reveal className={`md:col-span-7 ${i % 2 ? "md:order-2" : ""}`}>
+                <Image p={p} ratio="aspect-video" />
+              </Reveal>
+              <Reveal delay={0.1} className={`md:col-span-5 ${i % 2 ? "md:order-1" : ""}`}>
+                <Meta p={p} />
+              </Reveal>
+            </article>
           ))}
+
+          <div className="grid gap-16 md:grid-cols-2 md:gap-12">
+            {small.map((p, i) => (
+              <article key={p.id} className={i === 1 ? "md:mt-24" : ""}>
+                <Reveal>
+                  <Image p={p} ratio="aspect-video" />
+                  <div className="mt-8">
+                    <Meta p={p} />
+                  </div>
+                </Reveal>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

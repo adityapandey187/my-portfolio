@@ -1,153 +1,102 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import avatar from "@/assets/aditya-avatar.jpg";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { name: "Home", href: "#home" },
+  { name: "Work", href: "#projects" },
   { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Journey", href: "#journey" },
-  { name: "Projects", href: "#projects" },
+  { name: "Process", href: "#process" },
   { name: "Services", href: "#services" },
-  { name: "Contact", href: "#contact" },
+  { name: "Skills", href: "#skills" },
+  { name: "FAQ", href: "#faq" },
 ];
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
-    document.documentElement.classList.add("dark");
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle("dark");
+  const go = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    setIsOpen(false);
+    window.history.pushState(null, "", href);
+    window.setTimeout(() => {
+      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    }, 120);
   };
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-        ? "bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg"
-        : "bg-transparent"
-        }`}
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        scrolled || isOpen ? "bg-background/85 backdrop-blur-md border-b border-border" : "bg-transparent"
+      }`}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <motion.a
-            href="#"
-            className="flex items-center gap-3"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+      <nav aria-label="Main" className="wrap flex h-16 items-center justify-between md:h-20">
+        <a
+          href="#home"
+          onClick={(e) => go(e, "#home")}
+          className="font-display text-lg font-bold tracking-tight"
+          aria-label="Aditya Pandey, back to top"
+        >
+          Aditya Pandey<span className="text-brand">.</span>
+        </a>
+
+        <ul className="hidden items-center gap-9 md:flex">
+          {navLinks.map((l) => (
+            <li key={l.name}>
+              <a href={l.href} onClick={(e) => go(e, l.href)} className="link-h text-[0.95rem] text-foreground/80 hover:text-foreground">
+                {l.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex items-center gap-3">
+          <a href="#contact" onClick={(e) => go(e, "#contact")} className="btn btn-solid hidden !py-2.5 md:inline-flex">
+            Start a Project
+          </a>
+          <button
+            className="-mr-2 p-2 md:hidden"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
           >
-            <img
-              src={avatar}
-              alt="Aditya Pandey"
-              width={40}
-              height={40}
-              decoding="async"
-              className="h-9 w-9 md:h-10 md:w-10 rounded-full object-cover object-top ring-2 ring-primary/50"
-            />
-            <span className="font-bold text-lg tracking-tight">
-              Aditya Pandey<span className="text-primary">.</span>
-            </span>
-          </motion.a>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link, index) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
-              >
-                {link.name}
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary rounded-full transition-all duration-300 group-hover:w-1/2" />
-              </motion.a>
-            ))}
-          </div>
-
-          {/* Theme Toggle & Mobile Menu */}
-          <div className="flex items-center gap-2">
-            <motion.button
-              whileHover={{ scale: 1.1, rotate: 180 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-              className="p-2 rounded-full bg-muted hover:bg-accent transition-colors"
-            >
-              {isDark ? (
-                <Sun className="w-5 h-5 text-primary" />
-              ) : (
-                <Moon className="w-5 h-5 text-muted-foreground" />
-              )}
-            </motion.button>
-
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label={isOpen ? "Close menu" : "Open menu"}
-              aria-expanded={isOpen}
-            >
-              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </Button>
-          </div>
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border"
+            transition={{ duration: 0.35 }}
+            className="overflow-hidden md:hidden"
           >
-            <div className="container-custom py-4 space-y-2">
-              {navLinks.map((link, index) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsOpen(false);
-                    window.history.pushState(null, "", link.href);
-                    window.setTimeout(() => {
-                      document
-                        .querySelector(link.href)
-                        ?.scrollIntoView({ behavior: "smooth" });
-                    }, 150);
-                  }}
-                  className="block px-4 py-3 text-foreground hover:bg-accent rounded-lg transition-colors"
-                >
-                  {link.name}
-                </motion.a>
+            <ul className="wrap pb-8 pt-2">
+              {[{ name: "Home", href: "#home" }, ...navLinks, { name: "Contact", href: "#contact" }].map((l) => (
+                <li key={l.name} className="border-t border-border">
+                  <a
+                    href={l.href}
+                    onClick={(e) => go(e, l.href)}
+                    className="block py-4 font-display text-2xl font-bold tracking-tight"
+                  >
+                    {l.name}
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </header>
   );
 };

@@ -1,106 +1,73 @@
-import { motion } from "framer-motion";
-import { Github, Linkedin, Instagram, Mail, Heart, Code } from "lucide-react";
+import { Github, Linkedin, Instagram, Mail } from "lucide-react";
 
-const socialLinks = [
+const socials = [
   { icon: Github, href: "https://github.com/adityapandey187", label: "GitHub" },
   { icon: Linkedin, href: "https://www.linkedin.com/in/aditya-pandey-0ba208427/", label: "LinkedIn" },
   { icon: Instagram, href: "https://www.instagram.com/adityapandey0.7", label: "Instagram" },
   { icon: Mail, href: "mailto:adityapandey451807@gmail.com", label: "Email" },
 ];
 
-const quickLinks = [
+const links = [
   { name: "Home", href: "#home" },
+  { name: "Work", href: "#projects" },
   { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Journey", href: "#journey" },
-  { name: "Projects", href: "#projects" },
+  { name: "Process", href: "#process" },
   { name: "Services", href: "#services" },
+  { name: "Skills", href: "#skills" },
+  { name: "FAQ", href: "#faq" },
   { name: "Contact", href: "#contact" },
 ];
 
-export const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
-  return (
-    <footer className="relative bg-muted/30 border-t border-border">
-      <div className="container mx-auto px-6 py-12 md:py-16">
-        <div className="grid md:grid-cols-3 gap-12 mb-12">
-          {/* Brand */}
-          <div>
-            <motion.a
-              href="#"
-              className="inline-block text-2xl font-bold mb-4"
-              whileHover={{ scale: 1.05 }}
-            >
-              Aditya <span className="text-gradient">Pandey</span>
-            </motion.a>
-            <p className="text-muted-foreground mb-6 max-w-xs">
-              Web developer building modern, responsive websites for individuals and small businesses. B.Tech CSE student.
-            </p>
-            <div className="flex gap-3">
-              {socialLinks.map((social) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="p-3 rounded-xl bg-muted hover:bg-accent transition-colors group"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                </motion.a>
-              ))}
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold text-foreground mb-4">Quick Links</h4>
-            <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-2 group"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors" />
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* CTA */}
-          <div>
-            <h4 className="text-lg font-semibold text-foreground mb-4">Say Hello</h4>
-            <p className="text-muted-foreground mb-4">
-              Have a website idea or a project in mind? Let's talk about building it.
-            </p>
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
-            >
-              Get in Touch
-              <Mail className="w-4 h-4" />
-            </motion.a>
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground flex items-center gap-2">
-            © {currentYear} Aditya Pandey. Built with
-            <Heart className="w-4 h-4 text-primary fill-primary" />
-            and
-            <Code className="w-4 h-4 text-primary" />
+export const Footer = () => (
+  <footer className="border-t border-border">
+    <div className="wrap py-14 md:py-20">
+      <div className="grid gap-12 md:grid-cols-12">
+        <div className="md:col-span-6">
+          <a href="#home" className="font-display text-4xl font-bold tracking-tight md:text-6xl">
+            Aditya Pandey<span className="text-brand">.</span>
+          </a>
+          <p className="mt-5 max-w-sm text-muted-foreground">
+            Web developer building modern, responsive websites for individuals and small businesses. B.Tech CSE
+            student.
           </p>
+          <a href="#contact" className="btn btn-solid mt-8">
+            Start a Project
+          </a>
+        </div>
+        <nav aria-label="Footer" className="md:col-span-3">
+          <p className="eyebrow mb-4">Navigate</p>
+          <ul className="space-y-2.5">
+            {links.map((l) => (
+              <li key={l.name}>
+                <a href={l.href} className="link-h text-foreground/85 hover:text-foreground">
+                  {l.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="md:col-span-3">
+          <p className="eyebrow mb-4">Elsewhere</p>
+          <ul className="space-y-2.5">
+            {socials.map((s) => (
+              <li key={s.label}>
+                <a
+                  href={s.href}
+                  target={s.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  className="link-h inline-flex items-center gap-2 text-foreground/85 hover:text-foreground"
+                >
+                  <s.icon className="h-4 w-4" aria-hidden="true" />
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
-    </footer>
-  );
-};
+      <p className="mt-16 border-t border-border pt-6 text-sm text-muted-foreground">
+        © {new Date().getFullYear()} Aditya Pandey. Built with React.
+      </p>
+    </div>
+  </footer>
+);
