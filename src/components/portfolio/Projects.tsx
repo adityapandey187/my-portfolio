@@ -1,44 +1,60 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink, Github } from "lucide-react";
-import techpathImg from "@/assets/techpath.jpg";
-import wicketxImg from "@/assets/wicketx.jpg";
-import portfolioImg from "@/assets/portfolio-v2.jpg";
+import { ExternalLink, Github, BookOpen } from "lucide-react";
+import wicketxImg from "@/assets/wx-shot.webp";
+import techpathImg from "@/assets/tp-shot.webp";
+import portfolioImg from "@/assets/pf-shot.webp";
+import conceptImg from "@/assets/cafe-shot.webp";
 
 const projects = [
   {
     id: 3,
     title: "WicketX",
     description:
-      "A live cricket scores web app: ball-by-ball commentary, full scorecards, series leaders, venue weather and trends, men's and women's career records, an On this day archive, ICC rankings, and BBC Sport cricket news - with dark mode and a mobile-first design.",
+      "A free live cricket scores platform: ball-by-ball commentary, full scorecards, schedules, series, teams, player compare, ICC rankings, career records and cricket news - with dark mode, English and Hindi, and a mobile-first design.",
     image: wicketxImg,
-    technologies: ["React", "JavaScript", "Render", "Cricsheet data", "Open-Meteo API"],
+    technologies: ["React", "JavaScript", "Python", "FastAPI", "Render"],
     liveUrl: "https://wicketx.onrender.com",
     githubUrl: "https://github.com/adityapandey187/wicketx-cricket",
-    featured: true,
+    caseStudy: "wicketx",
+    badge: "Featured",
   },
   {
     id: 1,
     title: "TechPath",
     description:
-      "A free interactive learning platform for tech students: 102 roadmaps, 537 topics with explanations and videos, 81 careers with India salary ranges, 80 project ideas, progress tracking, and PathAI - an AI tutor powered by Google Gemini.",
+      "A learning platform for tech students: learning roadmaps, career pages with salary ranges, project ideas, curated resources, and PathAI, an AI assistant - with accounts that save your progress.",
     image: techpathImg,
-    technologies: ["React 18", "TypeScript", "Vite", "Supabase", "Vercel", "Gemini API"],
+    technologies: ["React", "TypeScript", "Vite", "Supabase", "Gemini API", "Vercel"],
     liveUrl: "https://techpath-mu.vercel.app",
     githubUrl: "",
-    featured: true,
+    caseStudy: "techpath",
+    badge: "Featured",
   },
   {
     id: 2,
     title: "Personal Portfolio Website",
     description:
-      "My personal portfolio (this site), rebuilt with a dark violet theme. The first version was plain HTML/CSS/JavaScript on GitHub Pages.",
+      "My personal portfolio (this site): a dark violet single-page site presenting my projects, skills and contact information. The first version was plain HTML/CSS/JavaScript.",
     image: portfolioImg,
     technologies: ["React", "TypeScript", "Tailwind CSS", "Vite", "GitHub Pages"],
     liveUrl: "https://adityapandey187.github.io/my-portfolio/",
     githubUrl: "https://github.com/adityapandey187/my-portfolio",
-    featured: true,
+    caseStudy: "portfolio",
+    badge: "Featured",
+  },
+  {
+    id: 4,
+    title: "Business Website Concept",
+    description:
+      "A concept demo of a small-business website: a fictional cafe site showing the kind of clean, responsive page I can build for a local business. Not client work.",
+    image: conceptImg,
+    technologies: ["HTML", "CSS", "JavaScript"],
+    liveUrl: "concepts/business-site.html",
+    githubUrl: "",
+    caseStudy: "",
+    badge: "Concept demo",
   },
 ];
 
@@ -94,10 +110,10 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
         </div>
 
         {/* Featured badge */}
-        {project.featured && (
+        {project.badge && (
           <div className="absolute top-4 left-4">
             <span className="px-3 py-1 text-xs font-medium rounded-full bg-primary text-primary-foreground">
-              Featured
+              {project.badge}
             </span>
           </div>
         )}
@@ -113,7 +129,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
         </p>
 
         {/* Technologies */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 mb-5">
           {project.technologies.map((tech) => (
             <span
               key={tech}
@@ -122,6 +138,41 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
               {tech}
             </span>
           ))}
+        </div>
+
+        {/* Action buttons */}
+        <div className="flex flex-wrap gap-2">
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target={project.liveUrl.startsWith("http") ? "_blank" : undefined}
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+            >
+              <ExternalLink className="w-4 h-4" aria-hidden="true" />
+              Live Demo
+            </a>
+          )}
+          {project.caseStudy && (
+            <a
+              href={`#/case-studies/${project.caseStudy}`}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-primary/40 text-foreground text-sm font-medium hover:bg-primary/10 transition-colors"
+            >
+              <BookOpen className="w-4 h-4" aria-hidden="true" />
+              Case Study
+            </a>
+          )}
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-border text-muted-foreground text-sm font-medium hover:text-foreground hover:border-foreground/40 transition-colors"
+            >
+              <Github className="w-4 h-4" aria-hidden="true" />
+              GitHub
+            </a>
+          )}
         </div>
       </div>
     </motion.div>
@@ -148,7 +199,7 @@ export const Projects = () => {
             My <span className="text-gradient">Projects</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Real things I've actually built - more coming as I keep learning.
+            Real projects I've built, plus one clearly labelled concept demo - more coming as I keep learning.
           </p>
         </motion.div>
 
