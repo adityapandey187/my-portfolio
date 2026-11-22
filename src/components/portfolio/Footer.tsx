@@ -99,18 +99,6 @@ export const Footer = () => {
             and
             <Code className="w-4 h-4 text-primary" />
           </p>
-          <p className="text-sm text-muted-foreground">
-            Theme based on{" "}
-            <a
-              href="https://github.com/sohayelmahmud/Programmer-theme-Portfolio"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-primary transition-colors"
-            >
-              Programmer-theme-Portfolio
-            </a>{" "}
-            (MIT)
-          </p>
         </div>
       </div>
     </footer>
