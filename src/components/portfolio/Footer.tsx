@@ -11,7 +11,7 @@ const socialLinks = [
 const quickLinks = [
   { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
-  { name: "Education", href: "#education" },
+  { name: "Journey", href: "#journey" },
   { name: "Projects", href: "#projects" },
   { name: "Contact", href: "#contact" },
 ];

@@ -1,23 +1,47 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { GraduationCap, Target } from "lucide-react";
+import { GraduationCap, Target, Rocket, Sparkles, Hammer } from "lucide-react";
 
 const education = [
   {
-    institution: "B.Tech, Computer Science Engineering",
-    degree: "First-semester student building foundations in programming and computer science",
-    period: "Present",
+    institution: "Web Development Learning",
+    degree: "B.Tech Computer Science Engineering student learning HTML, CSS, JavaScript and React alongside programming fundamentals.",
+    period: "Now",
     icon: GraduationCap,
-    highlights: ["First Semester", "Programming Fundamentals", "Mathematics for CS"],
+    highlights: ["B.Tech CSE", "HTML / CSS / JS", "React"],
     isCurrent: true,
   },
   {
-    institution: "Career Goal",
-    degree: "Aspiring AI/ML Engineer - long-term goal in artificial intelligence and machine learning",
-    period: "Future",
+    institution: "Personal Projects",
+    degree: "WicketX, a live cricket scores web app, and TechPath, a learning platform for tech students with an AI tutor.",
+    period: "Built",
+    icon: Rocket,
+    highlights: ["WicketX", "TechPath", "Live demos"],
+    isCurrent: false,
+  },
+  {
+    institution: "AI-Powered Development",
+    degree: "Exploring how modern AI tools can speed up building and improve web projects.",
+    period: "Exploring",
+    icon: Sparkles,
+    highlights: ["AI-Assisted Development", "Modern tooling"],
+    isCurrent: false,
+  },
+  {
+    institution: "Building Practical Applications",
+    degree: "Putting skills into real, responsive websites, including this portfolio, with the goal of building sites for individuals and small businesses.",
+    period: "Ongoing",
+    icon: Hammer,
+    highlights: ["Responsive design", "Practical websites", "This portfolio"],
+    isCurrent: false,
+  },
+  {
+    institution: "Continued Technical Improvement",
+    degree: "Long-term goal in artificial intelligence and machine learning, built on a maths and Python foundation.",
+    period: "Next",
     icon: Target,
-    highlights: ["Artificial Intelligence", "Machine Learning", "Maths + Python Foundation"],
+    highlights: ["Artificial Intelligence", "Machine Learning", "Maths + Python"],
     isCurrent: false,
   },
 ];
@@ -27,7 +51,7 @@ export const Education = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="education" className="section-padding relative" ref={ref}>
+    <section id="journey" aria-labelledby="journey-heading" className="section-padding relative" ref={ref}>
       {/* Background decoration */}
       <div className="absolute inset-0 dotted-bg opacity-30" />
 
@@ -39,13 +63,13 @@ export const Education = () => {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-4">
-            Academic Background
+            Learning &amp; Building
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            <span className="text-gradient">Education</span>
+          <h2 id="journey-heading" className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            My <span className="text-gradient">Learning &amp; Building Journey</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Where I am right now, and where I'm heading.
+            How I'm learning web development, what I've built so far, and where I'm heading.
           </p>
         </motion.div>
 
