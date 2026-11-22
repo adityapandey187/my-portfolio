@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { MapPin, BookOpen, Cpu, Network, Sparkles } from "lucide-react";
+import { MapPin, Code2, Palette, Sparkles, GraduationCap } from "lucide-react";
 import avatar from "@/assets/aditya-avatar.jpg";
 
 const highlights = [
-  { label: "First Semester", note: "Starting my CSE degree", icon: BookOpen },
-  { label: "CSE Student", note: "Bachelor's degree in progress", icon: Cpu },
-  { label: "AI/ML Goal", note: "Long-term career direction", icon: Network },
-  { label: "Always Learning", note: "Consistency over shortcuts", icon: Sparkles },
+  { label: "Web Development", note: "Responsive sites with React", icon: Code2 },
+  { label: "UI/UX Design", note: "Clean, readable interfaces", icon: Palette },
+  { label: "AI-Assisted Building", note: "Modern AI-powered dev tools", icon: Sparkles },
+  { label: "Always Learning", note: "B.Tech CSE student", icon: GraduationCap },
 ];
 
 export const About = () => {
@@ -71,26 +71,24 @@ export const About = () => {
             </motion.span>
 
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-              Strong basics first,{" "}
-              <span className="text-gradient">big goals next</span>
+              Turning ideas into{" "}
+              <span className="text-gradient">practical websites</span>
             </h2>
 
-            <div className="space-y-4 text-muted-foreground text-lg leading-relaxed mb-8">
+            <div className="space-y-4 text-muted-foreground text-lg leading-relaxed mb-8 max-w-prose">
               <p>
-                I'm <span className="text-foreground font-semibold">Aditya Pandey</span>,
-                a first-semester Computer Science Engineering student at the beginning of my
-                B.Tech journey. Right now, my focus is on building strong basics instead of
-                pretending to know everything too early.
+                I'm <span className="text-foreground font-semibold">Aditya Pandey</span>, a
+                technology enthusiast interested in web development, UI/UX design and
+                artificial intelligence.
               </p>
               <p>
-                I'm learning programming fundamentals, problem solving, computer science
-                concepts, and the habits needed to study technical subjects consistently. I
-                want to understand each concept properly and grow step by step.
+                I enjoy turning ideas into practical digital experiences using modern web
+                technologies and AI-powered development tools.
               </p>
               <p>
-                My long-term career goal is to become an AI/ML engineer. For now, that means
-                strengthening the maths, programming, and computer science foundation that
-                artificial intelligence and machine learning are built on.
+                I'm continuously learning, experimenting and building projects that solve
+                real-world problems. My goal is to create responsive, accessible and
+                user-friendly websites for individuals and small businesses.
               </p>
             </div>
 
