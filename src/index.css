@@ -143,17 +143,66 @@
     background-size: 100% 1px;
   }
 
+  /* Glossy button: black glass body, angled light-edge border, inner top-left sheen, soft outer glow. */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-2xl border border-white/70 bg-black px-6 py-3.5 text-[1rem] font-normal text-foreground transition-all duration-300;
-    box-shadow: -6px 6px 18px -8px rgb(255 255 255 / 0.28), inset 0 0 0 1px rgb(255 255 255 / 0.04);
+    @apply relative isolate inline-flex items-center justify-center gap-2 overflow-hidden rounded-2xl px-6 py-3.5 text-[1rem] font-normal text-foreground transition-all duration-300;
+    border: 2px solid transparent;
+    background:
+      linear-gradient(180deg, #131313 0%, #000 70%) padding-box,
+      conic-gradient(from 215deg at 50% 50%, #fff 0deg, #fff 55deg, #3a3a3a 100deg, #1c1c1c 150deg, #5a5a5a 205deg, #fff 265deg, #fff 300deg, #8a8a8a 335deg, #fff 360deg) border-box;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.22),
+      inset 0 -10px 14px -8px rgb(0 0 0 / 0.9),
+      -8px 10px 22px -12px rgb(255 255 255 / 0.45),
+      0 0 0 1px rgb(0 0 0 / 0.6);
+  }
+  .btn::before {
+    content: "";
+    @apply pointer-events-none absolute inset-0 -z-10 opacity-90 transition-opacity duration-300;
+    background:
+      radial-gradient(120% 90% at 18% -10%, rgb(255 255 255 / 0.3), transparent 58%),
+      radial-gradient(70% 60% at 100% 0%, rgb(255 255 255 / 0.1), transparent 60%);
   }
   .btn:hover {
-    @apply -translate-y-0.5 bg-foreground text-background;
+    @apply -translate-y-0.5;
+    background:
+      linear-gradient(180deg, #232323 0%, #0a0a0a 75%) padding-box,
+      conic-gradient(from 215deg at 50% 50%, #fff 0deg, #fff 80deg, #6a6a6a 130deg, #3a3a3a 170deg, #9a9a9a 215deg, #fff 270deg, #fff 360deg) border-box;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.35),
+      inset 0 -10px 14px -8px rgb(0 0 0 / 0.8),
+      -10px 14px 28px -12px rgb(255 255 255 / 0.6),
+      0 0 0 1px rgb(0 0 0 / 0.6);
   }
-  .btn-solid {
+  .btn:hover::before {
+    @apply opacity-100;
   }
-  .btn-ghost {
-    @apply border-white/60;
+  .btn:active {
+    @apply translate-y-0;
+  }
+  .btn:focus-visible {
+    border-radius: 1rem;
+    outline-offset: 4px;
+  }
+  .btn-pill:focus-visible {
+    border-radius: 9999px;
+    outline-offset: 4px;
+  }
+
+  /* Nav pill: dark satin gradient with inset shading */
+  .btn-pill {
+    @apply inline-flex items-center gap-2 rounded-full px-5 py-3 text-[0.95rem] text-foreground/90 transition-all duration-300;
+    background: linear-gradient(180deg, #0d0d0d -74%, rgb(255 255 255 / 0.1) 183%);
+    border: 1px solid rgb(255 255 255 / 0.12);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.12),
+      inset 0 -8px 8px -4px rgb(0 0 0 / 0.35),
+      0 6px 18px -10px rgb(255 255 255 / 0.25);
+  }
+  .btn-pill:hover {
+    @apply text-foreground;
+    background: linear-gradient(180deg, #1a1a1a -74%, rgb(255 255 255 / 0.18) 183%);
+    border-color: rgb(255 255 255 / 0.3);
   }
 
   .chip {

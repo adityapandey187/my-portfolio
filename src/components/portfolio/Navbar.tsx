@@ -71,7 +71,7 @@ export const Navbar = () => {
         </ul>
 
         <div className="flex items-center gap-3">
-          <a href="#contact" onClick={(e) => go(e, "#contact")} className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-5 py-3 text-[0.95rem] transition-colors hover:bg-foreground hover:text-background md:inline-flex">
+          <a href="#contact" onClick={(e) => go(e, "#contact")} className="btn-pill hidden md:inline-flex">
             Start a Project
           </a>
           <button
