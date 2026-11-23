@@ -81,12 +81,34 @@
     padding-bottom: var(--space-section);
   }
 
+  /* Badge pill: near-black body, soft white sheen on the left edge, and a 7px dot
+     whose glow blinks on a 2s loop (measured from the reference, drawn in original CSS). */
   .eyebrow {
-    @apply inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[0.85rem] font-normal text-foreground;
+    @apply relative isolate inline-flex items-center rounded-full text-foreground;
+    gap: 10px;
+    padding: 10px 16px;
+    font-size: 1rem;
+    line-height: 1.45rem;
+    background: rgb(10 10 10 / 0.4);
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.05);
   }
   .eyebrow::before {
     content: "";
-    @apply h-1.5 w-1.5 rounded-full bg-foreground;
+    width: 7px;
+    height: 7px;
+    flex: none;
+    border-radius: 84px;
+    background: #fff;
+    animation: dot-glow 2s ease-in-out infinite;
+  }
+  .eyebrow::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: 26px;
+    background: linear-gradient(105deg, rgb(255 255 255 / 0.28) -19%, rgb(255 255 255 / 0) 20%);
+    pointer-events: none;
   }
 
   .display-xl {
@@ -250,3 +272,15 @@
     transform: translateX(-50%);
   }
 }
+
+@keyframes dot-glow {
+  0%, 55% { box-shadow: 0 0 14px 1px #bdbdbd; }
+  65%, 90% { box-shadow: 0 0 0 0 rgb(189 189 189 / 0); }
+  100% { box-shadow: 0 0 14px 1px #bdbdbd; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow::before { animation: none; box-shadow: 0 0 14px 1px #bdbdbd; }
+}
+/* The reference hides its animated hero backdrop below 810px: plain black on phones. */
+.hero-silk { display: none; }
+@media (min-width: 810px) { .hero-silk { display: block; } }

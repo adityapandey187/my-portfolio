@@ -11,7 +11,6 @@ const links = [
   { name: "Home", href: "#home" },
   { name: "Work", href: "#projects" },
   { name: "About", href: "#about" },
-  { name: "Process", href: "#process" },
   { name: "Services", href: "#services" },
   { name: "Skills", href: "#skills" },
   { name: "FAQ", href: "#faq" },

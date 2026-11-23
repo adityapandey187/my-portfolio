@@ -12,9 +12,9 @@ export const Hero = () => {
 
   return (
     <section id="home" aria-labelledby="hero-heading" className="relative flex min-h-[100svh] flex-col overflow-hidden">
-      <div className="absolute inset-0 opacity-100" aria-hidden="true">
-        <Silk className="scale-[1.06] blur-[3px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/30 to-black" />
+      <div className="hero-silk absolute inset-0" aria-hidden="true">
+        <Silk className="scale-[1.04]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
       </div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-center px-5 pt-32 text-center md:pt-40">
