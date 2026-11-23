@@ -25,7 +25,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 type Errors = Partial<Record<"name" | "email" | "projectType" | "budget" | "message", string>>;
 
 const field =
-  "w-full rounded-none border-0 border-b border-input bg-transparent px-0 py-3 text-base text-foreground placeholder:text-muted-foreground/70 transition-colors focus:border-foreground focus:outline-none focus-visible:outline-none";
+  "mt-2 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-base text-foreground placeholder:text-muted-foreground/70 transition-colors focus:border-white/60 focus:outline-none focus-visible:outline-none";
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
@@ -92,35 +92,35 @@ export const Contact = () => {
     ) : null;
 
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="section-space hairline">
-      <div className="wrap">
-        <Reveal>
-          <p className="eyebrow mb-5">Contact</p>
-          <h2 id="contact-heading" className="display-xl max-w-[14ch]">
-            Have a project in mind? Let's build something meaningful<span className="text-brand">.</span>
+    <section id="contact" aria-labelledby="contact-heading" className="px-3 py-8 md:px-5 md:py-14">
+      <div className="panel mx-auto max-w-[1360px]">
+        <Reveal className="flex flex-col items-center text-center">
+          <p className="eyebrow">Contact</p>
+          <h2 id="contact-heading" className="display-lg mt-7 max-w-[18ch]">
+            Have a project in mind? Let's build something meaningful.
           </h2>
         </Reveal>
 
-        <div className="mt-20 grid gap-16 md:grid-cols-12 md:gap-16">
+        <div className="mt-14 grid gap-12 md:mt-20 md:grid-cols-12 md:gap-14">
           <Reveal className="md:col-span-4">
             <p className="max-w-xs text-muted-foreground">
               Tell me about your project and I'll get back to you by email.
             </p>
-            <ul className="mt-10 space-y-5">
+            <ul className="mt-10 space-y-6">
               <li>
-                <p className="eyebrow mb-1">Email</p>
+                <p className="mb-1 text-sm text-muted-foreground">Email</p>
                 <a href={`mailto:${EMAIL}`} className="link-u break-all">
                   {EMAIL}
                 </a>
               </li>
               <li>
-                <p className="eyebrow mb-1">GitHub</p>
+                <p className="mb-1 text-sm text-muted-foreground">GitHub</p>
                 <a href="https://github.com/adityapandey187" target="_blank" rel="noopener noreferrer" className="link-u">
                   github.com/adityapandey187 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                 </a>
               </li>
               <li>
-                <p className="eyebrow mb-1">LinkedIn</p>
+                <p className="mb-1 text-sm text-muted-foreground">LinkedIn</p>
                 <a
                   href="https://www.linkedin.com/in/aditya-pandey-0ba208427/"
                   target="_blank"
@@ -134,10 +134,10 @@ export const Contact = () => {
           </Reveal>
 
           <Reveal delay={0.1} className="md:col-span-8">
-            <form onSubmit={handleSubmit} noValidate className="relative space-y-9">
-              <div className="grid gap-9 sm:grid-cols-2">
+            <form onSubmit={handleSubmit} noValidate className="card-dark relative space-y-8 p-6 md:p-10">
+              <div className="grid gap-8 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="contact-name" className="eyebrow">Full Name *</label>
+                  <label htmlFor="contact-name" className="text-sm text-muted-foreground">Full Name *</label>
                   <input
                     id="contact-name"
                     className={field}
@@ -151,7 +151,7 @@ export const Contact = () => {
                   <Err id="err-name" msg={errors.name} />
                 </div>
                 <div>
-                  <label htmlFor="contact-email" className="eyebrow">Email Address *</label>
+                  <label htmlFor="contact-email" className="text-sm text-muted-foreground">Email Address *</label>
                   <input
                     id="contact-email"
                     type="email"
@@ -167,9 +167,9 @@ export const Contact = () => {
                 </div>
               </div>
 
-              <div className="grid gap-9 sm:grid-cols-2">
+              <div className="grid gap-8 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="contact-type" className="eyebrow">Project Type *</label>
+                  <label htmlFor="contact-type" className="text-sm text-muted-foreground">Project Type *</label>
                   <select
                     id="contact-type"
                     className={field}
@@ -186,7 +186,7 @@ export const Contact = () => {
                   <Err id="err-type" msg={errors.projectType} />
                 </div>
                 <div>
-                  <label htmlFor="contact-budget" className="eyebrow">Estimated Budget *</label>
+                  <label htmlFor="contact-budget" className="text-sm text-muted-foreground">Estimated Budget *</label>
                   <select
                     id="contact-budget"
                     className={field}
@@ -205,7 +205,7 @@ export const Contact = () => {
               </div>
 
               <div>
-                <label htmlFor="contact-message" className="eyebrow">Project Description *</label>
+                <label htmlFor="contact-message" className="text-sm text-muted-foreground">Project Description *</label>
                 <textarea
                   id="contact-message"
                   className={`${field} resize-y`}
@@ -245,7 +245,7 @@ export const Contact = () => {
                 </p>
               </div>
               {status === "opened" && (
-                <p role="status" className="text-sm text-brand">
+                <p role="status" className="text-sm text-foreground">
                   Your email app should have opened with your message filled in. Press send there to deliver it.
                 </p>
               )}

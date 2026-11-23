@@ -37,12 +37,12 @@ const faqs = [
 export const Faq = () => {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" aria-labelledby="faq-heading" className="section-space hairline">
-      <div className="wrap grid gap-12 md:grid-cols-12 md:gap-16">
+    <section id="faq" aria-labelledby="faq-heading" className="px-3 py-8 md:px-5 md:py-14">
+      <div className="panel mx-auto grid max-w-[1360px] gap-10 md:grid-cols-12 md:gap-14">
         <Reveal className="md:col-span-4">
-          <p className="eyebrow mb-5">FAQ</p>
-          <h2 id="faq-heading" className="display-lg">
-            Questions.
+          <p className="eyebrow">FAQ</p>
+          <h2 id="faq-heading" className="display-lg mt-6">
+            Questions
           </h2>
           <p className="mt-6 max-w-xs text-muted-foreground">
             Something not covered here? Ask in the inquiry form below.
@@ -54,19 +54,19 @@ export const Faq = () => {
             const isOpen = open === i;
             return (
               <Reveal key={f.q} delay={i * 0.03}>
-                <div className="border-t border-border last:border-b">
+                <div className="card-dark mb-3 px-6 md:px-8">
                   <h3>
                     <button
                       id={`faq-btn-${i}`}
                       aria-expanded={isOpen}
                       aria-controls={`faq-panel-${i}`}
                       onClick={() => setOpen(isOpen ? null : i)}
-                      className="group flex w-full items-center justify-between gap-6 py-6 text-left"
+                      className="group flex w-full items-center justify-between gap-6 py-5 text-left md:py-6"
                     >
-                      <span className="font-display text-xl md:text-2xl">{f.q}</span>
+                      <span className="text-[1.1rem] font-normal tracking-tight md:text-[1.3rem]">{f.q}</span>
                       <Plus
                         aria-hidden="true"
-                        className={`h-5 w-5 shrink-0 transition-transform duration-300 ${isOpen ? "rotate-45 text-brand" : ""}`}
+                        className={`h-5 w-5 shrink-0 transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}
                       />
                     </button>
                   </h3>
@@ -82,7 +82,7 @@ export const Faq = () => {
                         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <p className="max-w-2xl pb-7 text-muted-foreground">{f.a}</p>
+                        <p className="max-w-2xl pb-6 text-muted-foreground">{f.a}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>

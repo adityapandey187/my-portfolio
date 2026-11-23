@@ -5,6 +5,13 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { name: "Work", href: "#projects" },
   { name: "About", href: "#about" },
+  { name: "Services", href: "#services" },
+  { name: "FAQ", href: "#faq" },
+  { name: "Contact", href: "#contact" },
+];
+const mobileLinks = [
+  { name: "Work", href: "#projects" },
+  { name: "About", href: "#about" },
   { name: "Process", href: "#process" },
   { name: "Services", href: "#services" },
   { name: "Skills", href: "#skills" },
@@ -34,23 +41,29 @@ export const Navbar = () => {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled || isOpen ? "bg-background/85 backdrop-blur-md border-b border-border" : "bg-transparent"
+        scrolled || isOpen ? "bg-black/70 backdrop-blur-md" : "bg-transparent"
       }`}
     >
-      <nav aria-label="Main" className="wrap flex h-16 items-center justify-between md:h-20">
+      <nav aria-label="Main" className="mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between px-5 md:h-20 md:px-9">
         <a
           href="#home"
           onClick={(e) => go(e, "#home")}
-          className="font-display text-lg font-bold tracking-tight"
+          className="flex items-center gap-2.5 text-[1.35rem] font-normal tracking-tight"
           aria-label="Aditya Pandey, back to top"
         >
-          Aditya Pandey<span className="text-brand">.</span>
+          <span aria-hidden="true" className="grid h-6 w-6 grid-cols-2 gap-[3px]">
+            <i className="rounded-[7px_3px_3px_3px] bg-foreground" />
+            <i className="rounded-[3px_7px_3px_3px] bg-foreground/70" />
+            <i className="rounded-[3px_3px_3px_7px] bg-foreground/70" />
+            <i className="rounded-[3px_3px_7px_3px] bg-foreground" />
+          </span>
+          Aditya Pandey
         </a>
 
-        <ul className="hidden items-center gap-9 md:flex">
+        <ul className="ml-auto mr-8 hidden items-center gap-9 md:flex">
           {navLinks.map((l) => (
             <li key={l.name}>
-              <a href={l.href} onClick={(e) => go(e, l.href)} className="link-h text-[0.95rem] text-foreground/80 hover:text-foreground">
+              <a href={l.href} onClick={(e) => go(e, l.href)} className="text-[1rem] text-foreground/85 transition-colors hover:text-foreground">
                 {l.name}
               </a>
             </li>
@@ -58,7 +71,7 @@ export const Navbar = () => {
         </ul>
 
         <div className="flex items-center gap-3">
-          <a href="#contact" onClick={(e) => go(e, "#contact")} className="btn btn-solid hidden !py-2.5 md:inline-flex">
+          <a href="#contact" onClick={(e) => go(e, "#contact")} className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-5 py-3 text-[0.95rem] transition-colors hover:bg-foreground hover:text-background md:inline-flex">
             Start a Project
           </a>
           <button
@@ -82,12 +95,12 @@ export const Navbar = () => {
             className="overflow-hidden md:hidden"
           >
             <ul className="wrap pb-8 pt-2">
-              {[{ name: "Home", href: "#home" }, ...navLinks, { name: "Contact", href: "#contact" }].map((l) => (
-                <li key={l.name} className="border-t border-border">
+              {[{ name: "Home", href: "#home" }, ...mobileLinks, { name: "Contact", href: "#contact" }].map((l) => (
+                <li key={l.name} className="border-t border-white/10">
                   <a
                     href={l.href}
                     onClick={(e) => go(e, l.href)}
-                    className="block py-4 font-display text-2xl font-bold tracking-tight"
+                    className="block py-4 text-2xl font-light tracking-tight"
                   >
                     {l.name}
                   </a>

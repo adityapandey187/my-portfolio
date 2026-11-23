@@ -17,10 +17,10 @@ const Study = ({ study }: { study: CaseStudy }) => {
   const project = projects.find((p) => p.caseStudy === study.slug);
   return (
     <main className="wrap pb-24 pt-28 md:pt-40">
-      <a href="#projects" className="link-h mb-12 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+      <a href="#projects" className="link-h mb-10 flex w-fit items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
         <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Back to portfolio
       </a>
-      <p className="eyebrow mb-5">Case Study</p>
+      <p className="eyebrow mb-7 w-fit">Case Study</p>
       <h1 className="display-lg max-w-[18ch]">{study.title}</h1>
       {project && (
         <>

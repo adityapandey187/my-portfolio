@@ -48,52 +48,51 @@ const journey = [
 ];
 
 export const Skills = () => (
-  <section id="skills" aria-labelledby="skills-heading" className="section-space hairline">
-    <div className="wrap">
-      <Reveal>
-        <p className="eyebrow mb-5">Skills &amp; Learning</p>
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <h2 id="skills-heading" className="display-lg max-w-[14ch]">
-            Stack &amp; journey.
-          </h2>
-          <p className="max-w-sm text-muted-foreground">
-            Honest levels, no exaggeration: what I use to build websites and what I'm still learning.
-          </p>
-        </div>
+  <section id="skills" aria-labelledby="skills-heading" className="px-3 py-8 md:px-5 md:py-14">
+    <div className="panel mx-auto max-w-[1360px]">
+      <Reveal className="flex flex-col items-center text-center">
+        <p className="eyebrow">Skills &amp; Learning</p>
+        <h2 id="skills-heading" className="display-lg mt-7 max-w-[14ch]">
+          Stack &amp; journey
+        </h2>
+        <p className="mt-5 max-w-md text-muted-foreground">
+          Honest levels, no exaggeration: what I use to build websites and what I'm still learning.
+        </p>
       </Reveal>
 
-      <div className="mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {groups.map((g, i) => (
-          <Reveal key={g.title} delay={i * 0.06}>
-            <h3 className="mb-4 border-b border-border pb-3 font-display text-lg">{g.title}</h3>
-            <ul className="space-y-3">
-              {g.items.map(([name, level]) => (
-                <li key={name} className="flex items-baseline justify-between gap-3 text-[0.95rem]">
-                  <span>{name}</span>
-                  <span className="shrink-0 text-xs text-muted-foreground">{level}</span>
-                </li>
-              ))}
-            </ul>
+          <Reveal key={g.title} delay={i * 0.05} className="h-full">
+            <div className="card-dark h-full p-6">
+              <h3 className="border-b border-white/10 pb-4 text-[1.15rem] font-normal tracking-tight">{g.title}</h3>
+              <ul className="mt-4 space-y-3">
+                {g.items.map(([name, level]) => (
+                  <li key={name} className="flex items-baseline justify-between gap-3 text-[0.92rem]">
+                    <span>{name}</span>
+                    <span className="shrink-0 text-xs text-muted-foreground">{level}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </Reveal>
         ))}
       </div>
 
-      <Reveal className="mt-24">
-        <h3 className="display-md mb-10">My learning &amp; building journey</h3>
+      <Reveal className="mt-16">
+        <h3 className="display-md mb-6">My learning &amp; building journey</h3>
       </Reveal>
-      <ol>
+      <ol className="border-t border-white/10">
         {journey.map((j, i) => (
           <li key={j.t}>
-            <Reveal delay={i * 0.04}>
-              <div className="grid gap-2 border-t border-border py-6 md:grid-cols-12 md:gap-8">
-                <span className="text-sm text-brand md:col-span-2">{j.p}</span>
-                <h4 className="font-display text-xl md:col-span-4">{j.t}</h4>
-                <p className="text-muted-foreground md:col-span-6">{j.d}</p>
+            <Reveal delay={i * 0.03}>
+              <div className="grid gap-1.5 border-b border-white/10 py-5 md:grid-cols-12 md:gap-8">
+                <span className="text-sm text-muted-foreground md:col-span-2">{j.p}</span>
+                <h4 className="text-[1.1rem] font-normal tracking-tight md:col-span-4">{j.t}</h4>
+                <p className="text-[0.95rem] text-muted-foreground md:col-span-6">{j.d}</p>
               </div>
             </Reveal>
           </li>
         ))}
-        <li aria-hidden="true" className="border-t border-border" />
       </ol>
     </div>
   </section>

@@ -5,29 +5,29 @@
 /* Design tokens: near-black canvas, warm off-white ink, one restrained accent (token based, easy to retheme). */
 @layer base {
   :root {
-    --background: 0 0% 4%;
-    --foreground: 40 18% 94%;
-    --card: 0 0% 8%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 5%;
     --card-foreground: 40 18% 94%;
     --popover: 0 0% 8%;
     --popover-foreground: 40 18% 94%;
-    --primary: 40 18% 94%;
+    --primary: 0 0% 98%;
     --primary-foreground: 0 0% 6%;
     --secondary: 0 0% 12%;
     --secondary-foreground: 40 18% 94%;
     --muted: 0 0% 11%;
-    --muted-foreground: 40 5% 64%;
+    --muted-foreground: 0 0% 66%;
     --accent: 0 0% 14%;
     --accent-foreground: 40 18% 94%;
     --destructive: 0 80% 66%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 19%;
+    --border: 0 0% 15%;
     --input: 0 0% 22%;
-    --ring: 16 88% 62%;
-    --brand: 16 88% 62%;
+    --ring: 0 0% 100%;
+    --brand: 0 0% 100%;
     --radius: 1rem;
 
-    --sidebar-background: 0 0% 4%;
+    --sidebar-background: 0 0% 0%;
     --sidebar-foreground: 40 18% 94%;
     --sidebar-primary: 40 18% 94%;
     --sidebar-primary-foreground: 0 0% 6%;
@@ -57,15 +57,15 @@
     @apply bg-background text-foreground antialiased;
     color-scheme: dark;
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: 1.0625rem;
+    font-size: 1rem;
     line-height: 1.6;
   }
 
   h1, h2, h3, h4 {
-    font-family: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
-    letter-spacing: -0.03em;
-    line-height: 1.02;
-    font-weight: 700;
+    font-family: 'Inter', system-ui, sans-serif;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    font-weight: 300;
   }
 }
 
@@ -82,25 +82,37 @@
   }
 
   .eyebrow {
-    @apply text-xs font-medium uppercase text-muted-foreground;
-    letter-spacing: 0.16em;
+    @apply inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[0.85rem] font-normal text-foreground;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-1.5 w-1.5 rounded-full bg-foreground;
   }
 
   .display-xl {
-    font-size: clamp(2.9rem, 9.2vw, 8.25rem);
-    line-height: 0.94;
-    letter-spacing: -0.045em;
-  }
-
-  .display-lg {
-    font-size: clamp(2.4rem, 6.4vw, 5.5rem);
-    line-height: 0.98;
+    font-size: clamp(2.6rem, 7.2vw, 6.1rem);
+    line-height: 1;
     letter-spacing: -0.04em;
   }
-
+  .display-lg {
+    font-size: clamp(2.6rem, 6vw, 5.2rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
   .display-md {
-    font-size: clamp(1.9rem, 3.6vw, 3.25rem);
-    line-height: 1.02;
+    font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+
+  /* Big rounded containers, the reference's section frame */
+  .panel {
+    @apply relative overflow-hidden border border-white/[0.09] bg-black;
+    border-radius: clamp(1.75rem, 4vw, 3.25rem);
+    padding: clamp(1.25rem, 4.5vw, 4.5rem);
+  }
+  .card-dark {
+    @apply rounded-[1.75rem] border border-white/[0.08] bg-white/[0.035];
   }
 
   /* Animated underline link */
@@ -132,20 +144,20 @@
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[0.95rem] font-medium transition-all duration-300;
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl border border-white/70 bg-black px-6 py-3.5 text-[1rem] font-normal text-foreground transition-all duration-300;
+    box-shadow: -6px 6px 18px -8px rgb(255 255 255 / 0.28), inset 0 0 0 1px rgb(255 255 255 / 0.04);
+  }
+  .btn:hover {
+    @apply -translate-y-0.5 bg-foreground text-background;
   }
   .btn-solid {
-    @apply bg-foreground text-background hover:-translate-y-0.5;
-  }
-  .btn-solid:hover {
-    box-shadow: 0 10px 30px -14px hsl(40 18% 94% / 0.35);
   }
   .btn-ghost {
-    @apply border border-foreground/25 text-foreground hover:bg-foreground hover:text-background hover:border-foreground;
+    @apply border-white/60;
   }
 
   .chip {
-    @apply inline-flex items-center rounded-full border border-border px-3 py-1 text-[0.78rem] text-muted-foreground;
+    @apply inline-flex items-center rounded-xl bg-white/[0.07] px-4 py-2.5 text-[0.9rem] text-muted-foreground;
   }
 
   .hairline {
@@ -154,7 +166,7 @@
 }
 
 ::selection {
-  background: hsl(var(--brand) / 0.22);
+  background: hsl(0 0% 100% / 0.22);
 }
 
 /* Accessibility: visible focus for keyboard users */
@@ -175,5 +187,11 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
   }
 }

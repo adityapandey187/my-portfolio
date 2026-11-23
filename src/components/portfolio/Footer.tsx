@@ -19,12 +19,12 @@ const links = [
 ];
 
 export const Footer = () => (
-  <footer className="border-t border-border">
-    <div className="wrap py-14 md:py-20">
+  <footer className="px-3 pb-6 pt-8 md:px-5">
+    <div className="panel mx-auto max-w-[1360px]">
       <div className="grid gap-12 md:grid-cols-12">
         <div className="md:col-span-6">
-          <a href="#home" className="font-display text-4xl font-bold tracking-tight md:text-6xl">
-            Aditya Pandey<span className="text-brand">.</span>
+          <a href="#home" className="text-4xl font-light tracking-tight md:text-6xl">
+            Aditya Pandey
           </a>
           <p className="mt-5 max-w-sm text-muted-foreground">
             Web developer building modern, responsive websites for individuals and small businesses. B.Tech CSE
@@ -35,11 +35,11 @@ export const Footer = () => (
           </a>
         </div>
         <nav aria-label="Footer" className="md:col-span-3">
-          <p className="eyebrow mb-4">Navigate</p>
+          <p className="mb-4 text-sm text-muted-foreground">Navigate</p>
           <ul className="space-y-2.5">
             {links.map((l) => (
               <li key={l.name}>
-                <a href={l.href} className="link-h text-foreground/85 hover:text-foreground">
+                <a href={l.href} className="text-foreground/85 hover:text-foreground">
                   {l.name}
                 </a>
               </li>
@@ -47,7 +47,7 @@ export const Footer = () => (
           </ul>
         </nav>
         <div className="md:col-span-3">
-          <p className="eyebrow mb-4">Elsewhere</p>
+          <p className="mb-4 text-sm text-muted-foreground">Elsewhere</p>
           <ul className="space-y-2.5">
             {socials.map((s) => (
               <li key={s.label}>
@@ -55,7 +55,7 @@ export const Footer = () => (
                   href={s.href}
                   target={s.href.startsWith("http") ? "_blank" : undefined}
                   rel="noopener noreferrer"
-                  className="link-h inline-flex items-center gap-2 text-foreground/85 hover:text-foreground"
+                  className="inline-flex items-center gap-2 text-foreground/85 hover:text-foreground"
                 >
                   <s.icon className="h-4 w-4" aria-hidden="true" />
                   {s.label}
@@ -65,7 +65,7 @@ export const Footer = () => (
           </ul>
         </div>
       </div>
-      <p className="mt-16 border-t border-border pt-6 text-sm text-muted-foreground">
+      <p className="mt-14 border-t border-white/10 pt-6 text-sm text-muted-foreground">
         © {new Date().getFullYear()} Aditya Pandey. Built with React.
       </p>
     </div>
