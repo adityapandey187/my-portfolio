@@ -143,61 +143,67 @@
     background-size: 100% 1px;
   }
 
-  /* Glossy button: black glass body, angled light-edge border, inner top-left sheen, soft outer glow. */
+  /* Glossy button, built from the reference's measured numbers:
+     ring 1.4px #3b3b3b, radius 11.5px, black inner radius 10px, padding 8px 24px, 18px/28.8px text.
+     Light comes from soft blobs: bright on the ring (top right, left, bottom left),
+     grey sheen inside (bottom left, top right) and a faint glow spilling outside two corners. */
   .btn {
-    @apply relative isolate inline-flex items-center justify-center gap-2 overflow-hidden rounded-2xl px-6 py-3.5 text-[1rem] font-normal text-foreground transition-all duration-300;
-    border: 2px solid transparent;
+    @apply relative isolate inline-flex items-center justify-center gap-2 text-foreground transition-[box-shadow,transform] duration-300;
+    border-radius: 11.5px;
+    padding: calc(8px + 1.4px) calc(24px + 1.4px);
+    font-size: 1.125rem;
+    line-height: 1.8rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
     background:
-      linear-gradient(180deg, #131313 0%, #000 70%) padding-box,
-      conic-gradient(from 215deg at 50% 50%, #fff 0deg, #fff 55deg, #3a3a3a 100deg, #1c1c1c 150deg, #5a5a5a 205deg, #fff 265deg, #fff 300deg, #8a8a8a 335deg, #fff 360deg) border-box;
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.22),
-      inset 0 -10px 14px -8px rgb(0 0 0 / 0.9),
-      -8px 10px 22px -12px rgb(255 255 255 / 0.45),
-      0 0 0 1px rgb(0 0 0 / 0.6);
+      radial-gradient(ellipse 62px 26px at calc(100% - 30px) 0, #fff 38%, rgb(255 255 255 / 0) 100%),
+      radial-gradient(ellipse 14px 70px at 0 62%, #e2e2e2 30%, rgb(226 226 226 / 0) 100%),
+      radial-gradient(ellipse 30px 30px at 0 78%, #ececec 40%, rgb(236 236 236 / 0) 100%),
+      radial-gradient(ellipse 24px 26px at 0 100%, #fff 35%, rgb(255 255 255 / 0) 100%),
+      #3b3b3b;
+    box-shadow: 0 1px 9px 0 rgb(255 255 255 / 0);
   }
   .btn::before {
     content: "";
-    @apply pointer-events-none absolute inset-0 -z-10 opacity-90 transition-opacity duration-300;
+    position: absolute;
+    inset: 1.4px;
+    z-index: -1;
+    border-radius: 10px;
     background:
-      radial-gradient(120% 90% at 18% -10%, rgb(255 255 255 / 0.3), transparent 58%),
-      radial-gradient(70% 60% at 100% 0%, rgb(255 255 255 / 0.1), transparent 60%);
+      radial-gradient(ellipse 52px 30px at 16px calc(100% + 8px), rgb(163 163 163 / 0.45) 0%, rgb(0 0 0 / 0) 100%),
+      radial-gradient(ellipse 54px 26px at calc(100% - 46px) 0, #737373 0%, rgb(0 0 0 / 0) 100%),
+      #000;
+  }
+  .btn::after {
+    content: "";
+    position: absolute;
+    inset: -22px;
+    z-index: -2;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 36px 22px at 40px calc(100% - 30px), rgb(171 171 171 / 0.38) 0%, rgb(0 0 0 / 0) 100%),
+      radial-gradient(ellipse 44px 26px at calc(100% - 46px) 34px, rgb(255 255 255 / 0.28) 0%, rgb(255 255 255 / 0) 100%);
   }
   .btn:hover {
     @apply -translate-y-0.5;
-    background:
-      linear-gradient(180deg, #232323 0%, #0a0a0a 75%) padding-box,
-      conic-gradient(from 215deg at 50% 50%, #fff 0deg, #fff 80deg, #6a6a6a 130deg, #3a3a3a 170deg, #9a9a9a 215deg, #fff 270deg, #fff 360deg) border-box;
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.35),
-      inset 0 -10px 14px -8px rgb(0 0 0 / 0.8),
-      -10px 14px 28px -12px rgb(255 255 255 / 0.6),
-      0 0 0 1px rgb(0 0 0 / 0.6);
-  }
-  .btn:hover::before {
-    @apply opacity-100;
+    box-shadow: 0 1px 12px 0 rgb(255 255 255 / 0.55);
   }
   .btn:active {
     @apply translate-y-0;
   }
   .btn:focus-visible {
-    border-radius: 1rem;
-    outline-offset: 4px;
-  }
-  .btn-pill:focus-visible {
-    border-radius: 9999px;
-    outline-offset: 4px;
+    border-radius: 11.5px;
+    outline-offset: 5px;
   }
 
   /* Nav pill: dark satin gradient with inset shading */
   .btn-pill {
-    @apply inline-flex items-center gap-2 rounded-full px-5 py-3 text-[0.95rem] text-foreground/90 transition-all duration-300;
+    @apply inline-flex items-center gap-2 rounded-full px-6 py-[0.65rem] text-[1rem] text-foreground/90 transition-all duration-300;
     background: linear-gradient(180deg, #0d0d0d -74%, rgb(255 255 255 / 0.1) 183%);
-    border: 1px solid rgb(255 255 255 / 0.12);
+    border: 1px solid rgb(255 255 255 / 0.14);
     box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.12),
-      inset 0 -8px 8px -4px rgb(0 0 0 / 0.35),
-      0 6px 18px -10px rgb(255 255 255 / 0.25);
+      inset 0 1px 0 rgb(255 255 255 / 0.06),
+      inset 0 -8px 8px -4px rgb(0 0 0 / 0.35);
   }
   .btn-pill:hover {
     @apply text-foreground;
